@@ -22,9 +22,9 @@ class _MyAppState extends State<MyApp> {
 
   // Platform messages are asynchronous, so we initialize in an async method.
   Future<void> initPlatformState() async {
-    Flutterumeng.setLogEnabled(enabled: true);
-    Flutterumeng.shareInitUM(appKey: '5e9ad231978eea083f0c79af', channel: 'appstore');
-    Flutterumeng.shareInitDingTalk(appKey: 'dingoaco0acwfwqshnzorc');
+//    Flutterumeng.setLogEnabled(enabled: true);
+//    Flutterumeng.shareInitUM(appKey: '5e9ad231978eea083f0c79af', channel: 'appstore');
+//    Flutterumeng.shareInitDingTalk(appKey: 'dingoaiex4ka6vshseqky9');
     
     String platformVersion;
     // Platform messages may fail, so we use a try/catch PlatformException.
