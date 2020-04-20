@@ -5,6 +5,8 @@ buildscript {
     repositories {
         google()
         jcenter()
+        maven { url 'https://dl.bintray.com/umsdk/release' }
+
     }
 
     dependencies {
@@ -16,6 +18,8 @@ rootProject.allprojects {
     repositories {
         google()
         jcenter()
+        maven { url 'https://dl.bintray.com/umsdk/release' }
+
     }
 }
 
@@ -31,4 +35,18 @@ android {
     lintOptions {
         disable 'InvalidPackage'
     }
+
+    dependencies {
+        compile  'com.umeng.umsdk:common:1.5.4'
+        compile  'com.umeng.umsdk:share-core:6.9.4'
+        compile  'com.umeng.umsdk:share-board:6.9.4'
+
+        compile  'com.umeng.umsdk:share-qq:6.9.4'
+        compile  'com.umeng.umsdk:share-wx:6.9.4'
+        compile  'com.umeng.umsdk:share-sina:6.9.4'
+        compile  'com.umeng.umsdk:share-alipay:6.9.4'
+        compile  'com.umeng.umsdk:share-dingding:6.9.4'
+
+    }
+
 }

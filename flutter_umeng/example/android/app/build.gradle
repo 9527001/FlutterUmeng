@@ -39,6 +39,8 @@ android {
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        //todo 更换QQ的appID
+        manifestPlaceholders = [qqappid: "xxx"]
     }
 
     buildTypes {
