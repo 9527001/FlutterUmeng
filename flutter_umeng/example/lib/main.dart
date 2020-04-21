@@ -27,7 +27,7 @@ class _MyAppState extends State<MyApp> {
     Flutterumeng.shareInitUMIos(appKey: '5e9ad231978eea083f0c79af', channel: 'appstore');
     Flutterumeng.shareInitUMAndroid(appKey: '5e9e8f0b978eea083f0c813e', channel: 'android');
     Flutterumeng.shareInitDingTalk(appKey: 'dingoaiex4ka6vshseqky9');
-    Flutterumeng.shareInitQQ(appKey: 'qq5e9e8f0b978eea0',redirectURL: 'https://www.baidu.com');
+    Flutterumeng.shareInitQQ(appKey: '1110443120',redirectURL: 'https://www.baidu.com');
     Flutterumeng.shareInitWeChat(appKey: 'wx5e9e8f0b978',appSecret: "5e9e8f0b978", redirectURL: 'https://www.baidu.com');
     Flutterumeng.shareInitSina(appKey: 'sina5e9e8f0b978',appSecret: "5e9e8f0b978",redirectURL: 'https://www.baidu.com');
 

@@ -14,3 +14,13 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter, view our
 [online documentation](https://flutter.dev/docs), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
+
+## QQ
+### appID 1110443120
+### appkey aYYjmc3FoH7Va8E7
+
+## dingtalk
+### appkey dingoaiex4ka6vshseqky9
+
+
