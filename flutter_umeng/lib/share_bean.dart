@@ -64,6 +64,13 @@ class ShareBean {
         content: text,
         appMethod: AppMethod.shareImageText);
   }
+  factory ShareBean.board({
+    @required String text,
+  }) {
+    return ShareBean(
+        content: text,
+        appMethod: AppMethod.ShareWithBoard);
+  }
 }
 
 /*分享平台*/

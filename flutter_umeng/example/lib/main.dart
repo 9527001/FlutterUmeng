@@ -23,9 +23,14 @@ class _MyAppState extends State<MyApp> {
   // Platform messages are asynchronous, so we initialize in an async method.
   Future<void> initPlatformState() async {
     Flutterumeng.setLogEnabled(enabled: true);
-    Flutterumeng.shareInitUM(appKey: '5e9ad231978eea083f0c79af', channel: 'appstore');
+
+    Flutterumeng.shareInitUMIos(appKey: '5e9ad231978eea083f0c79af', channel: 'appstore');
+    Flutterumeng.shareInitUMAndroid(appKey: '5e9e8f0b978eea083f0c813e', channel: 'android');
     Flutterumeng.shareInitDingTalk(appKey: 'dingoaiex4ka6vshseqky9');
-    
+    Flutterumeng.shareInitQQ(appKey: 'qq5e9e8f0b978eea0',redirectURL: 'https://www.baidu.com');
+    Flutterumeng.shareInitWeChat(appKey: 'wx5e9e8f0b978',appSecret: "5e9e8f0b978", redirectURL: 'https://www.baidu.com');
+    Flutterumeng.shareInitSina(appKey: 'sina5e9e8f0b978',appSecret: "5e9e8f0b978",redirectURL: 'https://www.baidu.com');
+
     String platformVersion;
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
@@ -55,8 +60,11 @@ class _MyAppState extends State<MyApp> {
           child: Column(
             children: <Widget>[
               GestureDetector(
-                child: Text(
-                  'text',
+                child: Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Text(
+                    'text',
+                  ),
                 ),
                 onTap: () {
                   Flutterumeng.share(
@@ -67,8 +75,11 @@ class _MyAppState extends State<MyApp> {
                 },
               ),
               GestureDetector(
-                child: Text(
-                  'image',
+                child: Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Text(
+                    'image',
+                  ),
                 ),
                 onTap: () {
                   Flutterumeng.share(
@@ -80,8 +91,11 @@ class _MyAppState extends State<MyApp> {
                 },
               ),
               GestureDetector(
-                child: Text(
-                  'image text',
+                child: Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Text(
+                    'image text',
+                  ),
                 ),
                 onTap: () {
                   Flutterumeng.share(
@@ -94,8 +108,11 @@ class _MyAppState extends State<MyApp> {
                 },
               ),
               GestureDetector(
-                child: Text(
-                  'web',
+                child: Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Text(
+                    'web',
+                  ),
                 ),
                 onTap: () {
                   Flutterumeng.share(
@@ -106,6 +123,21 @@ class _MyAppState extends State<MyApp> {
                       image:
                           'https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1587181134&di=012a3e34f388d1c9b8fab346fac09587&src=http://c.hiphotos.baidu.com/zhidao/pic/item/d009b3de9c82d1587e249850820a19d8bd3e42a9.jpg',
                       url: 'https://www.baidu.com',
+                    ),
+                  );
+                },
+              ),
+              GestureDetector(
+                child: Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Text(
+                    '固定面板，测试使用',
+                  ),
+                ),
+                onTap: () {
+                  Flutterumeng.share(
+                    share: ShareBean.board(
+                      text: '测试',
                     ),
                   );
                 },

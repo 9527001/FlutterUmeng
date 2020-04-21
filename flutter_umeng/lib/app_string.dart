@@ -21,8 +21,12 @@ class AppMethod {
   static const String ShareImage = 'shareImage';
   static const String shareImageText = 'shareImageText';
   static const String ShareWebView = 'shareWebView';
+  static const String ShareWithBoard = "shareWithBoard";
+
 
   static const String ShareInitUM = 'shareInitUM';
+  static const String ShareInitUMIOS = 'shareInitUMIOS';
+  static const String ShareInitUMAndroid = 'shareInitUMAndroid';
   static const String ShareInitWeChat = 'shareInitWeChat';
   static const String ShareInitQQ = 'shareInitQQ';
   static const String ShareInitSina = 'shareInitSina';

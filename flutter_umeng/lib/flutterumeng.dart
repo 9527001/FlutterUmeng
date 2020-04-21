@@ -28,6 +28,33 @@ class Flutterumeng {
     return result;
   }
 
+
+  static Future<String> shareInitUMAndroid({
+    @required String appKey,
+    @required String channel,
+  }) async {
+    Map<String, dynamic> shareMap = {
+      AppString.AppKey: appKey,
+      AppString.Channel: channel,
+    };
+    final String result =
+    await _channel.invokeMethod(AppMethod.ShareInitUMAndroid, shareMap);
+    return result;
+  }
+
+  static Future<String> shareInitUMIos({
+    @required String appKey,
+    @required String channel,
+  }) async {
+    Map<String, dynamic> shareMap = {
+      AppString.AppKey: appKey,
+      AppString.Channel: channel,
+    };
+    final String result =
+    await _channel.invokeMethod(AppMethod.ShareInitUMIOS, shareMap);
+    return result;
+  }
+
 /*设置是否在console输出sdk的log信息.*/
   static Future setLogEnabled({
     @required bool enabled,
@@ -95,7 +122,7 @@ class Flutterumeng {
 
   static Future<String> share({ShareBean share}) async {
     Map<String, dynamic> shareMap = {
-      AppParams.SharePlatformType: share.platFormType.index,
+      AppParams.SharePlatformType: share.platFormType == null ? 0 : share.platFormType.index,
       AppParams.ShareTitle: share.title,
       AppParams.ShareContent: share.content,
       AppParams.ShareImage: share.image,

@@ -1,4 +1,4 @@
-package android.src.main.java.zd.com.flutterumeng.wxapi;
+package zd.com.flutterumeng.wxapi;
 
 import com.umeng.socialize.weixin.view.WXCallbackActivity;
 

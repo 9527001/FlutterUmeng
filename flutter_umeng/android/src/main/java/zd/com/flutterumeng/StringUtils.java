@@ -28,8 +28,10 @@ class StringMethodUtils {
     static String ShareImage = "shareImage";
     static String shareImageText = "shareImageText";
     static String ShareWebView = "shareWebView";
+    static String ShareWithBoard = "shareWithBoard";
 
-    static String ShareInitUM = "shareInitUM";
+
+    static String ShareInitUM = "shareInitUMAndroid";
     static String ShareInitWeChat = "shareInitWeChat";
     static String ShareInitQQ = "shareInitQQ";
     static String ShareInitSina = "shareInitSina";

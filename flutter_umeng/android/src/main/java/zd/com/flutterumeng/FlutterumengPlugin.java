@@ -1,15 +1,18 @@
 package zd.com.flutterumeng;
 
+import android.content.Intent;
+
 import com.umeng.commonsdk.UMConfigure;
 import com.umeng.socialize.PlatformConfig;
 import com.umeng.socialize.ShareAction;
-import com.umeng.socialize.UMShareListener;
+import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.media.UMImage;
 import com.umeng.socialize.media.UMWeb;
+import com.umeng.socialize.uploadlog.UMLog;
 
 import androidx.annotation.NonNull;
-import io.flutter.embedding.engine.plugins.FlutterPlugin;
+import io.flutter.Log;
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
@@ -19,7 +22,7 @@ import io.flutter.plugin.common.PluginRegistry.Registrar;
 /**
  * FlutterumengPlugin
  */
-public class FlutterumengPlugin implements FlutterPlugin, MethodCallHandler {
+public class FlutterumengPlugin implements MethodCallHandler {
 
     Registrar registrar;
     MethodChannel channel;
@@ -29,26 +32,6 @@ public class FlutterumengPlugin implements FlutterPlugin, MethodCallHandler {
         this.channel = channel;
     }
 
-    public FlutterumengPlugin() {
-    }
-
-    @Override
-    public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
-        final MethodChannel channel = new MethodChannel(flutterPluginBinding.getFlutterEngine().getDartExecutor(), "flutterumeng");
-        channel.setMethodCallHandler(new FlutterumengPlugin());
-    }
-
-    // This static function is optional and equivalent to onAttachedToEngine. It supports the old
-    // pre-Flutter-1.12 Android projects. You are encouraged to continue supporting
-    // plugin registration via this function while apps migrate to use the new Android APIs
-    // post-flutter-1.12 via https://flutter.dev/go/android-project-migration.
-    //
-    // It is encouraged to share logic between onAttachedToEngine and registerWith to keep
-    // them functionally equivalent. Only one of onAttachedToEngine or registerWith will be called
-    // depending on the user's project. onAttachedToEngine or registerWith must both be defined
-    // in the same class.
-
-
     public static void registerWith(Registrar registrar) {
         final MethodChannel channel = new MethodChannel(registrar.messenger(), "flutterumeng");
         channel.setMethodCallHandler(new FlutterumengPlugin(registrar, channel));
@@ -56,13 +39,14 @@ public class FlutterumengPlugin implements FlutterPlugin, MethodCallHandler {
 
     @Override
     public void onMethodCall(@NonNull MethodCall call, @NonNull Result result) {
-
         if (call.method.equals("getPlatformVersion")) {
             result.success("Android " + android.os.Build.VERSION.RELEASE);
         } else if (call.method.equals(StringMethodUtils.ShareInitUM)) {
             String appkey = call.argument(StringUtils.AppKey);
+            assert appkey != null : ("appkey 不能为空");
             String appSecret = call.argument(StringUtils.AppSecret);
             UMConfigure.init(registrar.activity(), appkey, "umeng", UMConfigure.DEVICE_TYPE_PHONE, appSecret);//58edcfeb310c93091c000be2 5965ee00734be40b580001a0
+            System.out.println("UM初始化成功");
 
 
         } else if (call.method.equals(StringMethodUtils.SetLogEnabled)) {
@@ -72,6 +56,7 @@ public class FlutterumengPlugin implements FlutterPlugin, MethodCallHandler {
             String appkey = call.argument(StringUtils.AppKey);
             assert appkey != null : ("appkey 不能为空");
             PlatformConfig.setDing(appkey);
+            System.out.println("钉钉初始化成功");
 
         } else if (call.method.equals(StringMethodUtils.ShareInitWeChat)) {
             String appkey = call.argument(StringUtils.AppKey);
@@ -132,15 +117,17 @@ public class FlutterumengPlugin implements FlutterPlugin, MethodCallHandler {
                     .withMedia(web)
                     .setCallback(new UmengshareActionListener(registrar.activity(), result))//回调监听器
                     .share();
+        } else if (call.method.equals(StringMethodUtils.ShareWithBoard)) {
+            String content = call.argument(StringUtils.ShareContent);
+
+            new ShareAction(registrar.activity())
+                    .withText(content)
+                    .setDisplayList(SHARE_MEDIA.SINA, SHARE_MEDIA.QQ, SHARE_MEDIA.WEIXIN,SHARE_MEDIA.DINGTALK)
+                    .setCallback(new UmengshareActionListener(registrar.activity(), result))
+                    .open();
         } else {
             result.notImplemented();
         }
-    }
-
-
-    @Override
-    public void onDetachedFromEngine(@NonNull FlutterPluginBinding binding) {
-
     }
 
     private SHARE_MEDIA onShareType(int index) {
@@ -160,5 +147,6 @@ public class FlutterumengPlugin implements FlutterPlugin, MethodCallHandler {
         }
         return SHARE_MEDIA.MORE;
     }
+
 
 }

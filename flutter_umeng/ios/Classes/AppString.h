@@ -30,8 +30,9 @@ static const NSString *  MethodShareText = @"shareText";
 static const NSString *  MethodShareImage = @"shareImage";
 static const NSString *  MethodshareImageText = @"shareImageText";
 static const NSString *  MethodShareWebView = @"shareWebView";
+static const NSString *  MethodShareWithBoard = @"shareWithBoard";
 
-static const NSString *  MethodShareInitUM = @"shareInitUM";
+static const NSString *  MethodShareInitUM = @"shareInitUMIOS";
 static const NSString *  MethodShareInitWeChat = @"shareInitWeChat";
 static const NSString *  MethodShareInitQQ = @"shareInitQQ";
 static const NSString *  MethodShareInitSina = @"shareInitSina";

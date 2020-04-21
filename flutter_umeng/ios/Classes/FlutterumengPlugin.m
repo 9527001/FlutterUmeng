@@ -6,6 +6,7 @@
 #import <UMShare/UMShare.h>
 #import <UMCommonLog/UMCommonLogHeaders.h>
 #import <UMShare/UMShare.h>
+#import <UShareUI/UShareUI.h>
 #import <UMCShare/UMSocialQQHandler.h>
 #import <UMCShare/UMSocialQQHandler.h>
 #import <UMCShare/UMSocialQQHandler.h>
@@ -31,6 +32,7 @@
         NSString * channel = params[Channel];
         [UMConfigure initWithAppkey:appkey channel:channel];
         result([UMConfigure umidString]);
+        NSLog(@"友盟初始化成功");
         
     }
     else if ([StringMethodSetLogEnabled isEqualToString:methodString]){
@@ -39,6 +41,7 @@
          */
         NSNumber * enabled = params[StringParamsEnable] ;
         [UMConfigure setLogEnabled:[enabled boolValue]];
+        NSLog(@"日志开启");
         
     }else if ([MethodShareInitWeChat isEqualToString:methodString]){
         /* 设置微信的appKey和appSecret */
@@ -140,6 +143,27 @@
         //分享消息对象设置分享内容对象
         messageObject.shareObject = shareObject;
         [self shareWithPlaformType:platformType messageObject:messageObject result:result];
+        
+    }else if ([MethodShareWithBoard isEqualToString:methodString]){
+        
+
+        //显示分享面板
+        [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType, NSDictionary *userInfo) {
+            
+            
+            // 根据获取的platformType确定所选平台进行下一步操作
+            
+            NSString * shareText = params[ShareContent];
+            
+            
+            //创建分享消息对象
+            UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
+            //设置文本
+            messageObject.text = shareText;
+            //调用分享接口
+            [self shareWithPlaformType:platformType messageObject:messageObject result:result];
+            
+        }];
         
     }else if ([@"getPlatformVersion" isEqualToString:methodString]){
         result([@"iOS " stringByAppendingString:[[UIDevice currentDevice] systemVersion]]);
