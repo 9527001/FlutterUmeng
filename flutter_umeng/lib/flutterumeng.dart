@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
@@ -28,7 +29,6 @@ class Flutterumeng {
     return result;
   }
 
-
   static Future<String> shareInitUMAndroid({
     @required String appKey,
     @required String channel,
@@ -37,9 +37,13 @@ class Flutterumeng {
       AppString.AppKey: appKey,
       AppString.Channel: channel,
     };
-    final String result =
-    await _channel.invokeMethod(AppMethod.ShareInitUMAndroid, shareMap);
-    return result;
+    if (Platform.isAndroid) {
+      final String result =
+          await _channel.invokeMethod(AppMethod.ShareInitUMAndroid, shareMap);
+      return result;
+    }
+    return '';
+
   }
 
   static Future<String> shareInitUMIos({
@@ -50,9 +54,12 @@ class Flutterumeng {
       AppString.AppKey: appKey,
       AppString.Channel: channel,
     };
-    final String result =
-    await _channel.invokeMethod(AppMethod.ShareInitUMIOS, shareMap);
-    return result;
+    if (Platform.isIOS) {
+      final String result =
+          await _channel.invokeMethod(AppMethod.ShareInitUMIOS, shareMap);
+      return result;
+    }
+    return '';
   }
 
 /*设置是否在console输出sdk的log信息.*/
@@ -82,10 +89,12 @@ class Flutterumeng {
 
   static Future<String> shareInitQQ({
     @required String appKey,
+    @required String appSecret,
     String redirectURL = AppString.RedirectURLContent,
   }) async {
     Map<String, dynamic> shareMap = {
       AppString.AppKey: appKey,
+      AppString.AppSecret: appSecret,
       AppString.RedirectURL: redirectURL,
     };
     final String result =
@@ -122,7 +131,8 @@ class Flutterumeng {
 
   static Future<String> share({ShareBean share}) async {
     Map<String, dynamic> shareMap = {
-      AppParams.SharePlatformType: share.platFormType == null ? 0 : share.platFormType.index,
+      AppParams.SharePlatformType:
+          share.platFormType == null ? 0 : share.platFormType.index,
       AppParams.ShareTitle: share.title,
       AppParams.ShareContent: share.content,
       AppParams.ShareImage: share.image,

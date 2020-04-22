@@ -17,12 +17,13 @@ import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import io.flutter.plugin.common.MethodChannel.Result;
+import io.flutter.plugin.common.PluginRegistry;
 import io.flutter.plugin.common.PluginRegistry.Registrar;
 
 /**
  * FlutterumengPlugin
  */
-public class FlutterumengPlugin implements MethodCallHandler {
+public class FlutterumengPlugin implements MethodCallHandler , PluginRegistry.ActivityResultListener, PluginRegistry.RequestPermissionsResultListener {
 
     Registrar registrar;
     MethodChannel channel;
@@ -46,6 +47,7 @@ public class FlutterumengPlugin implements MethodCallHandler {
             assert appkey != null : ("appkey 不能为空");
             String appSecret = call.argument(StringUtils.AppSecret);
             UMConfigure.init(registrar.activity(), appkey, "umeng", UMConfigure.DEVICE_TYPE_PHONE, appSecret);//58edcfeb310c93091c000be2 5965ee00734be40b580001a0
+            result.success("shareInitSuccess");
             System.out.println("UM初始化成功");
 
 
@@ -62,15 +64,21 @@ public class FlutterumengPlugin implements MethodCallHandler {
             String appkey = call.argument(StringUtils.AppKey);
             String appSecret = call.argument(StringUtils.AppSecret);
             PlatformConfig.setWeixin(appkey, appSecret);
+            System.out.println("微信初始化成功");
+
         } else if (call.method.equals(StringMethodUtils.ShareInitQQ)) {
-            String appkey = call.argument(StringUtils.AppKey);
-            String appSecret = call.argument(StringUtils.AppSecret);
-            PlatformConfig.setQQZone(appkey, appSecret);
+            String appID = call.argument(StringUtils.AppKey);
+            String appKey = call.argument(StringUtils.AppSecret);
+            PlatformConfig.setQQZone(appID, appKey);
+            System.out.println("Qq初始化成功");
+
         } else if (call.method.equals(StringMethodUtils.ShareInitSina)) {
             String appkey = call.argument(StringUtils.AppKey);
             String appSecret = call.argument(StringUtils.AppSecret);
             String redirectURL = call.argument(StringUtils.RedirectURL);
             PlatformConfig.setSinaWeibo(appkey, appSecret, redirectURL);
+            System.out.println("sina初始化成功");
+
         } else if (call.method.equals(StringMethodUtils.ShareText)) {
             int index = call.argument(StringUtils.SharePlatformType);
             String content = call.argument(StringUtils.ShareContent);
@@ -120,12 +128,17 @@ public class FlutterumengPlugin implements MethodCallHandler {
         } else if (call.method.equals(StringMethodUtils.ShareWithBoard)) {
             String content = call.argument(StringUtils.ShareContent);
 
+            UMWeb web = new UMWeb("https://www.baidu.com");
+            web.setTitle(content);//标题
+            web.setThumb(new UMImage(registrar.activity(), "https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1587473602&di=9163c62bbbc8a91e6a35874c8326da4d&src=http://a3.att.hudong.com/14/75/01300000164186121366756803686.jpg"));  //缩略图web.set
+            web.setDescription(content);//描述
+
             new ShareAction(registrar.activity())
-                    .withText(content)
+                    .withMedia(web)
                     .setDisplayList(SHARE_MEDIA.SINA, SHARE_MEDIA.QQ, SHARE_MEDIA.WEIXIN,SHARE_MEDIA.DINGTALK)
                     .setCallback(new UmengshareActionListener(registrar.activity(), result))
                     .open();
-        } else {
+         } else {
             result.notImplemented();
         }
     }
@@ -148,5 +161,16 @@ public class FlutterumengPlugin implements MethodCallHandler {
         return SHARE_MEDIA.MORE;
     }
 
+    @Override
+    public boolean onActivityResult(int i, int i1, Intent intent) {
+        UMShareAPI.get(registrar.activity()).onActivityResult(i, i1, intent);
+        return false;
+    }
+
+    @Override
+    public boolean onRequestPermissionsResult(int i, String[] strings, int[] ints) {
+        return false;
+    }
 
 }
+

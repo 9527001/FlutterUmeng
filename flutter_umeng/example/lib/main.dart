@@ -27,7 +27,7 @@ class _MyAppState extends State<MyApp> {
     Flutterumeng.shareInitUMIos(appKey: '5e9ad231978eea083f0c79af', channel: 'appstore');
     Flutterumeng.shareInitUMAndroid(appKey: '5e9e8f0b978eea083f0c813e', channel: 'android');
     Flutterumeng.shareInitDingTalk(appKey: 'dingoaiex4ka6vshseqky9');
-    Flutterumeng.shareInitQQ(appKey: '1110443120',redirectURL: 'https://www.baidu.com');
+    Flutterumeng.shareInitQQ(appKey: '1110443120',appSecret: 'aYYjmc3FoH7Va8E7',redirectURL: 'https://www.baidu.com');
     Flutterumeng.shareInitWeChat(appKey: 'wx5e9e8f0b978',appSecret: "5e9e8f0b978", redirectURL: 'https://www.baidu.com');
     Flutterumeng.shareInitSina(appKey: 'sina5e9e8f0b978',appSecret: "5e9e8f0b978",redirectURL: 'https://www.baidu.com');
 
@@ -134,12 +134,13 @@ class _MyAppState extends State<MyApp> {
                     '固定面板，测试使用',
                   ),
                 ),
-                onTap: () {
-                  Flutterumeng.share(
+                onTap: ()  async {
+                  String result = await Flutterumeng.share(
                     share: ShareBean.board(
                       text: '测试',
                     ),
                   );
+                  print('分享结果:$result');
                 },
               ),
             ],
