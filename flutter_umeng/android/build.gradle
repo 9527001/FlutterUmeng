@@ -41,15 +41,15 @@ android {
     }
 
     dependencies {
-        implementation 'com.umeng.umsdk:common:2.2.5'
-        implementation 'com.umeng.umsdk:share-core:7.0.0'
-        implementation 'com.umeng.umsdk:share-board:7.0.0'
+        api 'com.umeng.umsdk:common:2.2.5'
+        api 'com.umeng.umsdk:share-core:7.0.0'
+        api 'com.umeng.umsdk:share-board:7.0.0'
 
-        implementation 'com.umeng.umsdk:share-qq:7.0.0'
-        implementation 'com.umeng.umsdk:share-wx:7.0.0'
-        implementation 'com.umeng.umsdk:share-sina:7.0.0'
-        implementation 'com.umeng.umsdk:share-dingding:7.0.0'
-        implementation 'com.alibaba.android:ddsharesdk:1.1.0'
+        api 'com.umeng.umsdk:share-qq:7.0.0'
+        api 'com.umeng.umsdk:share-wx:7.0.0'
+        api 'com.umeng.umsdk:share-sina:7.0.0'
+        api 'com.umeng.umsdk:share-dingding:7.0.0'
+        api 'com.alibaba.android:ddsharesdk:1.1.0'
     }
 
 }
