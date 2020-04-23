@@ -11,9 +11,20 @@
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity-alias
+            android:name="${applicationId}.ddshare.DDShareActivity"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:targetActivity="zd.com.flutterumeng.ddshare.DDShareActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
 
 
-
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="sdksample" />
+            </intent-filter>
+        </activity-alias>
 
         <!-- 2.  sina -->
         <activity
@@ -42,6 +53,24 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <activity-alias
+            android:name="${applicationId}.wxapi.WXEntryActivity"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:targetActivity="zd.com.flutterumeng.wxapi.WXEntryActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
+
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="sdksample" />
+            </intent-filter>
+        </activity-alias>
+
+
+
     </application>
 <!--权限配置-->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />

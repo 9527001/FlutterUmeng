@@ -43,13 +43,32 @@ android {
         manifestPlaceholders = [qqappid: "1110443120"]
     }
 
+    signingConfigs {
+        release {
+            storeFile file("umeng.jks")
+            storePassword "jvtd178"
+            keyAlias "flutterumeng"
+            keyPassword "jvtd178"
+        }
+    }
+
     buildTypes {
         release {
             // TODO: Add your own signing config for the release build.
             // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.release
         }
+        debug {
+            // TODO: Add your own signing config for the release build.
+            // Signing with the debug keys for now, so `flutter run --release` works.
+            signingConfig signingConfigs.release
+        }
+//        MD5:  8A:89:30:41:F0:10:DB:9B:9E:D4:38:A7:EF:11:42:5C
+//        SHA1: 3E:0F:B0:45:86:78:49:E7:60:41:11:97:C1:D9:7F:D4:A7:F0:E3:4B
+//        SHA256: D4:90:45:B8:E0:16:62:CF:10:91:93:6A:60:93:D8:1A:6F:FD:03:95:ED:5F:5A:CE:CE:AC:77:1E:39:37:31:03
     }
+
+
 }
 
 flutter {

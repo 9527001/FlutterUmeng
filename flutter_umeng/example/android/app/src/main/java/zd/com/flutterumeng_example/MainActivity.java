@@ -22,4 +22,5 @@ public class MainActivity extends FlutterActivity {
     super.onActivityResult(requestCode, resultCode, data);
     FlutterumengPlugin.getInstance(this).onActivityResult(requestCode, resultCode, data);
   }
+
 }
