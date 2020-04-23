@@ -33,11 +33,11 @@ class _MyAppState extends State<MyApp> {
     Flutterumeng.shareInitQQ(
         appKey: '1110443120',
         appSecret: 'aYYjmc3FoH7Va8E7',
-        redirectURL: 'https://www.baidu.com');
+        redirectURL: '');
     Flutterumeng.shareInitWeChat(
-        appKey: 'wx5e9e8f0b978',
-        appSecret: "5e9e8f0b978",
-        redirectURL: 'https://www.baidu.com');
+        appKey: 'wxffb1c9036944dc36',
+        appSecret: "0fd7719d0a12c5f795d7bb67d5db034d",
+        redirectURL: 'https://www.reading-china.com/');
     Flutterumeng.shareInitSina(
         appKey: 'sina5e9e8f0b978',
         appSecret: "5e9e8f0b978",
@@ -97,7 +97,7 @@ class _MyAppState extends State<MyApp> {
                     share: ShareBean.image(
                         platFormType: SharePlatformType.DingTalk,
                         image:
-                            'https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1587181134&di=012a3e34f388d1c9b8fab346fac09587&src=http://c.hiphotos.baidu.com/zhidao/pic/item/d009b3de9c82d1587e249850820a19d8bd3e42a9.jpg'),
+                        'https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1587181134&di=012a3e34f388d1c9b8fab346fac09587&src=http://c.hiphotos.baidu.com/zhidao/pic/item/d009b3de9c82d1587e249850820a19d8bd3e42a9.jpg'),
                   );
                 },
               ),
@@ -114,7 +114,7 @@ class _MyAppState extends State<MyApp> {
                         platFormType: SharePlatformType.DingTalk,
                         text: '123',
                         image:
-                            'https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1587181134&di=012a3e34f388d1c9b8fab346fac09587&src=http://c.hiphotos.baidu.com/zhidao/pic/item/d009b3de9c82d1587e249850820a19d8bd3e42a9.jpg'),
+                        'https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1587181134&di=012a3e34f388d1c9b8fab346fac09587&src=http://c.hiphotos.baidu.com/zhidao/pic/item/d009b3de9c82d1587e249850820a19d8bd3e42a9.jpg'),
                   );
                 },
               ),
@@ -132,7 +132,7 @@ class _MyAppState extends State<MyApp> {
                       title: '标题',
                       content: '副标题',
                       image:
-                          'https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1587181134&di=012a3e34f388d1c9b8fab346fac09587&src=http://c.hiphotos.baidu.com/zhidao/pic/item/d009b3de9c82d1587e249850820a19d8bd3e42a9.jpg',
+                      'https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1587181134&di=012a3e34f388d1c9b8fab346fac09587&src=http://c.hiphotos.baidu.com/zhidao/pic/item/d009b3de9c82d1587e249850820a19d8bd3e42a9.jpg',
                       url: 'https://www.baidu.com',
                     ),
                   );
@@ -147,7 +147,7 @@ class _MyAppState extends State<MyApp> {
                 ),
                 onTap: () async {
                   ShareResponseType shareResponseType =
-                      await Flutterumeng.share(
+                  await Flutterumeng.share(
                     share: ShareBean.board(
                       text: '测试',
                     ),
