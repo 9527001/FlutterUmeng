@@ -1,5 +1,6 @@
 package zd.com.flutterumeng;
 
+import android.content.Context;
 import android.content.Intent;
 
 import com.umeng.commonsdk.UMConfigure;
@@ -25,12 +26,27 @@ import io.flutter.plugin.common.PluginRegistry.Registrar;
  */
 public class FlutterumengPlugin implements MethodCallHandler , PluginRegistry.ActivityResultListener, PluginRegistry.RequestPermissionsResultListener {
 
-    Registrar registrar;
-    MethodChannel channel;
+    private static  FlutterumengPlugin instance;
+   private Registrar registrar;
+    private MethodChannel channel;
+    private Context mContext;
 
     public FlutterumengPlugin(Registrar registrar, MethodChannel channel) {
         this.registrar = registrar;
         this.channel = channel;
+    }
+
+    public static FlutterumengPlugin getInstance(Context context) {
+        if (instance == null)
+            synchronized (FlutterumengPlugin.class) {
+                if (instance == null)
+                    instance = new FlutterumengPlugin(context.getApplicationContext());
+            }
+        return instance;
+    }
+
+    public FlutterumengPlugin(Context mContext) {
+        this.mContext = mContext;
     }
 
     public static void registerWith(Registrar registrar) {
@@ -163,7 +179,7 @@ public class FlutterumengPlugin implements MethodCallHandler , PluginRegistry.Ac
 
     @Override
     public boolean onActivityResult(int i, int i1, Intent intent) {
-        UMShareAPI.get(registrar.activity()).onActivityResult(i, i1, intent);
+        UMShareAPI.get(mContext).onActivityResult(i, i1, intent);
         return false;
     }
 

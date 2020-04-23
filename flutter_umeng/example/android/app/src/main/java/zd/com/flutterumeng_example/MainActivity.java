@@ -5,8 +5,10 @@ import android.os.Bundle;
 
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import io.flutter.app.FlutterActivity;
 import io.flutter.plugins.GeneratedPluginRegistrant;
+import zd.com.flutterumeng.FlutterumengPlugin;
 
 public class MainActivity extends FlutterActivity {
   @Override
@@ -14,9 +16,10 @@ public class MainActivity extends FlutterActivity {
     super.onCreate(savedInstanceState);
     GeneratedPluginRegistrant.registerWith(this);
   }
-//  @Override
-//  protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//    super.onActivityResult(requestCode, resultCode, data);
-//    UMShareAPI.get(this).onActivityResult(requestCode,resultCode,data);
-//  }
+
+  @Override
+  public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    super.onActivityResult(requestCode, resultCode, data);
+    FlutterumengPlugin.getInstance(this).onActivityResult(requestCode, resultCode, data);
+  }
 }

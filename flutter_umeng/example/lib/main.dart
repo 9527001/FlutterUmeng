@@ -3,6 +3,7 @@ import 'dart:async';
 
 import 'package:flutter/services.dart';
 import 'package:flutterumeng/flutterumeng.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 void main() => runApp(MyApp());
 
@@ -24,12 +25,23 @@ class _MyAppState extends State<MyApp> {
   Future<void> initPlatformState() async {
     Flutterumeng.setLogEnabled(enabled: true);
 
-    Flutterumeng.shareInitUMIos(appKey: '5e9ad231978eea083f0c79af', channel: 'appstore');
-    Flutterumeng.shareInitUMAndroid(appKey: '5e9e8f0b978eea083f0c813e', channel: 'android');
+    Flutterumeng.shareInitUMIos(
+        appKey: '5e9ad231978eea083f0c79af', channel: 'appstore');
+    Flutterumeng.shareInitUMAndroid(
+        appKey: '5e9e8f0b978eea083f0c813e', channel: 'android');
     Flutterumeng.shareInitDingTalk(appKey: 'dingoaiex4ka6vshseqky9');
-    Flutterumeng.shareInitQQ(appKey: '1110443120',appSecret: 'aYYjmc3FoH7Va8E7',redirectURL: 'https://www.baidu.com');
-    Flutterumeng.shareInitWeChat(appKey: 'wx5e9e8f0b978',appSecret: "5e9e8f0b978", redirectURL: 'https://www.baidu.com');
-    Flutterumeng.shareInitSina(appKey: 'sina5e9e8f0b978',appSecret: "5e9e8f0b978",redirectURL: 'https://www.baidu.com');
+    Flutterumeng.shareInitQQ(
+        appKey: '1110443120',
+        appSecret: 'aYYjmc3FoH7Va8E7',
+        redirectURL: 'https://www.baidu.com');
+    Flutterumeng.shareInitWeChat(
+        appKey: 'wx5e9e8f0b978',
+        appSecret: "5e9e8f0b978",
+        redirectURL: 'https://www.baidu.com');
+    Flutterumeng.shareInitSina(
+        appKey: 'sina5e9e8f0b978',
+        appSecret: "5e9e8f0b978",
+        redirectURL: 'https://www.baidu.com');
 
     String platformVersion;
     // Platform messages may fail, so we use a try/catch PlatformException.
@@ -69,8 +81,7 @@ class _MyAppState extends State<MyApp> {
                 onTap: () {
                   Flutterumeng.share(
                     share: ShareBean.text(
-                        platFormType: SharePlatformType.DingTalk,
-                        text: '123'),
+                        platFormType: SharePlatformType.DingTalk, text: '123'),
                   );
                 },
               ),
@@ -134,13 +145,38 @@ class _MyAppState extends State<MyApp> {
                     '固定面板，测试使用',
                   ),
                 ),
-                onTap: ()  async {
-                  String result = await Flutterumeng.share(
+                onTap: () async {
+                  ShareResponseType shareResponseType =
+                      await Flutterumeng.share(
                     share: ShareBean.board(
                       text: '测试',
                     ),
                   );
-                  print('分享结果:$result');
+                  String result;
+                  switch (shareResponseType) {
+                    case ShareResponseType.ShareResponseTypeUnknown:
+                      result = '分享结果:未知';
+                      break;
+                    case ShareResponseType.ShareResponseTypeFail:
+                      result = '分享结果:失败';
+                      break;
+                    case ShareResponseType.ShareResponseTypeCancel:
+                      result = '分享结果:取消';
+
+                      break;
+                    case ShareResponseType.ShareResponseTypeSuccess:
+                      result = '分享结果:成功';
+
+                      break;
+                  }
+                  Fluttertoast.showToast(
+                      msg: result,
+                      toastLength: Toast.LENGTH_SHORT,
+                      gravity: ToastGravity.CENTER,
+                      timeInSecForIosWeb: 1,
+                      backgroundColor: Colors.red,
+                      textColor: Colors.white,
+                      fontSize: 16.0);
                 },
               ),
             ],

@@ -27,30 +27,19 @@ public class UmengshareActionListener implements UMShareListener {
 
     @Override
     public void onResult(SHARE_MEDIA share_media) {
-//        Map<String,Object> map = new HashMap<>();
-//        map.put("um_status","SUCCESS");
-//
-        result.success("success");
-        System.out.println("umeng分享--SUCCESS");
+        result.success(2);
 
     }
 
     @Override
     public void onError(SHARE_MEDIA share_media, Throwable throwable) {
-//        Map<String,Object> map = new HashMap<>();
-//        map.put("um_status","ERROR");
-//        map.put("um_msg",throwable.getMessage());
-        result.success("fail");
-        System.out.println("umeng分享--fail");
+        result.success(0);
 
     }
 
     @Override
     public void onCancel(SHARE_MEDIA share_media) {
-//        Map<String,Object> map = new HashMap<>();
-//        map.put("um_status","CANCEL");
-        result.success("fail");
-        System.out.println("umeng分享--cancel");
+        result.success(1);
 
     }
 }

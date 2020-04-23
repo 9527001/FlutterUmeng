@@ -73,6 +73,16 @@ class ShareBean {
   }
 }
 
+
+
+/*分享结果 0 失败  1 取消 2 成功*/
+enum ShareResponseType {
+  ShareResponseTypeUnknown ,
+  ShareResponseTypeFail ,
+  ShareResponseTypeCancel,
+  ShareResponseTypeSuccess,
+}
+
 /*分享平台*/
 enum SharePlatformType {
   WeChatSession , //微信好友

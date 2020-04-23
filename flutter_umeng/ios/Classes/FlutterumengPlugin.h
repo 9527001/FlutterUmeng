@@ -1,4 +1,4 @@
 #import <Flutter/Flutter.h>
 
-@interface FlutterumengPlugin : NSObject<FlutterPlugin>
+@interface FlutterumengPlugin : NSObject<FlutterPlugin,FlutterApplicationLifeCycleDelegate>
 @end

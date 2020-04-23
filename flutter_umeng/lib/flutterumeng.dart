@@ -129,7 +129,7 @@ class Flutterumeng {
     return result;
   }
 
-  static Future<String> share({ShareBean share}) async {
+  static Future<ShareResponseType> share({ShareBean share}) async {
     Map<String, dynamic> shareMap = {
       AppParams.SharePlatformType:
           share.platFormType == null ? 0 : share.platFormType.index,
@@ -138,8 +138,16 @@ class Flutterumeng {
       AppParams.ShareImage: share.image,
       AppParams.ShareWebUrl: share.webUrl,
     };
-    final String result =
+    final int result =
         await _channel.invokeMethod(share.appMethod, shareMap);
-    return result;
+    if(result == 0){
+      return ShareResponseType.ShareResponseTypeFail;
+    }else if(result == 1){
+      return ShareResponseType.ShareResponseTypeCancel;
+    }else if(result == 2) {
+      return ShareResponseType.ShareResponseTypeSuccess;
+    }else {
+      return ShareResponseType.ShareResponseTypeUnknown;
+    }
   }
 }
