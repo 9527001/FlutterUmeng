@@ -34,3 +34,17 @@ samples, guidance on mobile development, and a full API reference.
 ### android
 #### 包名 zd.com.flutterumeng_example
 #### 签名 zd.com.flutterumeng_example
+
+
+
+## android 配置记录
+## 1.配置清单
+## 2.build.grade文件配置
+### dingtalk
+#### 在主工程配置文件，复制android代码部分的ddshare文件到主工程中
+### QQ
+#### 主工程的androd 的App的 build.grade配置          manifestPlaceholders = [qqappid: "xxxxxxx"]
+### wechat
+#### 常规配置
+### sina
+#### 1.因为友盟为导入新浪核心库，需要额外导入         api 'com.sina.weibo.sdk:core:4.4.3:openDefaultRelease@aar' 且 配置
