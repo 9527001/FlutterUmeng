@@ -39,8 +39,8 @@ class _MyAppState extends State<MyApp> {
         appSecret: "0fd7719d0a12c5f795d7bb67d5db034d",
         redirectURL: 'https://www.reading-china.com/');
     Flutterumeng.shareInitSina(
-        appKey: 'sina5e9e8f0b978',
-        appSecret: "5e9e8f0b978",
+        appKey: '655199122',
+        appSecret: "17dfef507567f6f038e20ef2a2b1f1ca",
         redirectURL: 'https://www.baidu.com');
 
     String platformVersion;

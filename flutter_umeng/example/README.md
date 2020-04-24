@@ -20,7 +20,17 @@ samples, guidance on mobile development, and a full API reference.
 ### appID 1110443120
 ### appkey aYYjmc3FoH7Va8E7
 
+## sina
+### App Key 655199122
+### App Secret 17dfef507567f6f038e20ef2a2b1f1ca
+
 ## dingtalk
 ### appkey dingoaiex4ka6vshseqky9
 
+## 信息
+### iOS
+#### bundleID zd.com.flutterumengExample
 
+### android
+#### 包名 zd.com.flutterumeng_example
+#### 签名 zd.com.flutterumeng_example
