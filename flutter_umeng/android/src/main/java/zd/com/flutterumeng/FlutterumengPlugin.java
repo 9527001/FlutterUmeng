@@ -24,10 +24,9 @@ import io.flutter.plugin.common.PluginRegistry.Registrar;
 /**
  * FlutterumengPlugin
  */
-public class FlutterumengPlugin implements MethodCallHandler , PluginRegistry.ActivityResultListener, PluginRegistry.RequestPermissionsResultListener {
+public class FlutterumengPlugin implements MethodCallHandler, PluginRegistry.ActivityResultListener, PluginRegistry.RequestPermissionsResultListener {
 
-    private static  FlutterumengPlugin instance;
-   private Registrar registrar;
+    private Registrar registrar;
     private MethodChannel channel;
     private Context mContext;
 
@@ -36,14 +35,6 @@ public class FlutterumengPlugin implements MethodCallHandler , PluginRegistry.Ac
         this.channel = channel;
     }
 
-    public static FlutterumengPlugin getInstance(Context context) {
-        if (instance == null)
-            synchronized (FlutterumengPlugin.class) {
-                if (instance == null)
-                    instance = new FlutterumengPlugin(context.getApplicationContext());
-            }
-        return instance;
-    }
 
     public FlutterumengPlugin(Context mContext) {
         this.mContext = mContext;
@@ -151,10 +142,10 @@ public class FlutterumengPlugin implements MethodCallHandler , PluginRegistry.Ac
 
             new ShareAction(registrar.activity())
                     .withMedia(web)
-                    .setDisplayList(SHARE_MEDIA.SINA, SHARE_MEDIA.QQ, SHARE_MEDIA.WEIXIN,SHARE_MEDIA.DINGTALK)
+                    .setDisplayList(SHARE_MEDIA.SINA, SHARE_MEDIA.QQ, SHARE_MEDIA.WEIXIN, SHARE_MEDIA.DINGTALK)
                     .setCallback(new UmengshareActionListener(registrar.activity(), result))
                     .open();
-         } else {
+        } else {
             result.notImplemented();
         }
     }

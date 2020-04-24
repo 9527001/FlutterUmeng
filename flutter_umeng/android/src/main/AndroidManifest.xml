@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="zd.com.flutterumeng">
 
     <application>
@@ -38,8 +39,8 @@
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name="com.sina.weibo.sdk.share.WbShareTransActivity"
-            android:launchMode="singleTask"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen">
+            android:launchMode="singleTop"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
             <intent-filter>
                 <action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY" />
 

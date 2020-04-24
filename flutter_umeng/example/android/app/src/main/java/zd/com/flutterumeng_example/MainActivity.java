@@ -17,10 +17,4 @@ public class MainActivity extends FlutterActivity {
     GeneratedPluginRegistrant.registerWith(this);
   }
 
-  @Override
-  public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-    super.onActivityResult(requestCode, resultCode, data);
-    FlutterumengPlugin.getInstance(this).onActivityResult(requestCode, resultCode, data);
-  }
-
 }
