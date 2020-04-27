@@ -25,7 +25,7 @@ URL Scheme是通过系统找到并跳转对应app的一类设置，通过向项�
 ### 1.主工程的androd 的App的 build.grade配置          manifestPlaceholders = [qqappid: "xxxxxxx"]
 #### 2.在主工程配置文件，复制android代码部分的ddshare文件到主工程中
        maven { url "https://dl.bintray.com/thelasterstar/maven/" }
-
+#### 3.dingalk 的签名 MD5小写且去掉冒号
 
 
 
