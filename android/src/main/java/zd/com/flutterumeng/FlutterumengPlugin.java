@@ -49,55 +49,55 @@ public class FlutterumengPlugin implements MethodCallHandler, PluginRegistry.Act
     public void onMethodCall(@NonNull MethodCall call, @NonNull Result result) {
         if (call.method.equals("getPlatformVersion")) {
             result.success("Android " + android.os.Build.VERSION.RELEASE);
-        } else if (call.method.equals(StringMethodUtils.ShareInitUM)) {
-            String appkey = call.argument(StringUtils.AppKey);
+        } else if (call.method.equals(UmMethodConfig.shareInitUM)) {
+            String appkey = call.argument(UmConfig.appKey);
             assert appkey != null : ("appkey 不能为空");
-            String appSecret = call.argument(StringUtils.AppSecret);
+            String appSecret = call.argument(UmConfig.appSecret);
             UMConfigure.init(registrar.activity(), appkey, "umeng", UMConfigure.DEVICE_TYPE_PHONE, appSecret);//58edcfeb310c93091c000be2 5965ee00734be40b580001a0
             result.success("shareInitSuccess");
             System.out.println("UM初始化成功");
 
 
-        } else if (call.method.equals(StringMethodUtils.SetLogEnabled)) {
-            boolean argument = call.argument(StringUtils.enable);
+        } else if (call.method.equals(UmMethodConfig.setLogEnabled)) {
+            boolean argument = call.argument(UmConfig.enable);
             UMConfigure.setLogEnabled(argument);
-        } else if (call.method.equals(StringMethodUtils.ShareInitDingTalk)) {
-            String appkey = call.argument(StringUtils.AppKey);
+        } else if (call.method.equals(UmMethodConfig.shareInitDingTalk)) {
+            String appkey = call.argument(UmConfig.appKey);
             assert appkey != null : ("appkey 不能为空");
             PlatformConfig.setDing(appkey);
             System.out.println("钉钉初始化成功");
 
-        } else if (call.method.equals(StringMethodUtils.ShareInitWeChat)) {
-            String appkey = call.argument(StringUtils.AppKey);
-            String appSecret = call.argument(StringUtils.AppSecret);
+        } else if (call.method.equals(UmMethodConfig.shareInitWeChat)) {
+            String appkey = call.argument(UmConfig.appKey);
+            String appSecret = call.argument(UmConfig.appSecret);
             PlatformConfig.setWeixin(appkey, appSecret);
             System.out.println("微信初始化成功");
 
-        } else if (call.method.equals(StringMethodUtils.ShareInitQQ)) {
-            String appID = call.argument(StringUtils.AppKey);
-            String appKey = call.argument(StringUtils.AppSecret);
+        } else if (call.method.equals(UmMethodConfig.shareInitQQ)) {
+            String appID = call.argument(UmConfig.appKey);
+            String appKey = call.argument(UmConfig.appSecret);
             PlatformConfig.setQQZone(appID, appKey);
             System.out.println("Qq初始化成功");
 
-        } else if (call.method.equals(StringMethodUtils.ShareInitSina)) {
-            String appkey = call.argument(StringUtils.AppKey);
-            String appSecret = call.argument(StringUtils.AppSecret);
-            String redirectURL = call.argument(StringUtils.RedirectURL);
+        } else if (call.method.equals(UmMethodConfig.shareInitSina)) {
+            String appkey = call.argument(UmConfig.appKey);
+            String appSecret = call.argument(UmConfig.appSecret);
+            String redirectURL = call.argument(UmConfig.redirectURL);
             PlatformConfig.setSinaWeibo(appkey, appSecret, redirectURL);
             System.out.println("sina初始化成功");
 
-        } else if (call.method.equals(StringMethodUtils.ShareText)) {
-            int index = call.argument(StringUtils.SharePlatformType);
-            String content = call.argument(StringUtils.ShareContent);
+        } else if (call.method.equals(UmMethodConfig.shareText)) {
+            int index = call.argument(UmConfig.sharePlatformType);
+            String content = call.argument(UmConfig.shareContent);
 
             new ShareAction(registrar.activity())
                     .setPlatform(onShareType(index))//传入平台
                     .withText(content)//分享内容
                     .setCallback(new UmengshareActionListener(registrar.activity(), result))//回调监听器
                     .share();
-        } else if (call.method.equals(StringMethodUtils.ShareImage)) {
-            int index = call.argument(StringUtils.SharePlatformType);
-            String imageUrl = call.argument(StringUtils.ShareImage);
+        } else if (call.method.equals(UmMethodConfig.shareImage)) {
+            int index = call.argument(UmConfig.sharePlatformType);
+            String imageUrl = call.argument(UmConfig.shareImage);
 
             new ShareAction(registrar.activity())
                     .setPlatform(onShareType(index))//传入平台
@@ -105,10 +105,10 @@ public class FlutterumengPlugin implements MethodCallHandler, PluginRegistry.Act
                     .withMedia(new UMImage(registrar.activity(), imageUrl))
                     .setCallback(new UmengshareActionListener(registrar.activity(), result))//回调监听器
                     .share();
-        } else if (call.method.equals(StringMethodUtils.shareImageText)) {
-            int index = call.argument(StringUtils.SharePlatformType);
-            String imageUrl = call.argument(StringUtils.ShareImage);
-            String content = call.argument(StringUtils.ShareContent);
+        } else if (call.method.equals(UmMethodConfig.shareImageText)) {
+            int index = call.argument(UmConfig.sharePlatformType);
+            String imageUrl = call.argument(UmConfig.shareImage);
+            String content = call.argument(UmConfig.shareContent);
 
             new ShareAction(registrar.activity())
                     .setPlatform(onShareType(index))//传入平台
@@ -116,12 +116,12 @@ public class FlutterumengPlugin implements MethodCallHandler, PluginRegistry.Act
                     .withMedia(new UMImage(registrar.activity(), imageUrl))
                     .setCallback(new UmengshareActionListener(registrar.activity(), result))//回调监听器
                     .share();
-        } else if (call.method.equals(StringMethodUtils.ShareWebView)) {
-            int index = call.argument(StringUtils.SharePlatformType);
-            String url = call.argument(StringUtils.ShareWebUrl);
-            String title = call.argument(StringUtils.ShareTitle);
-            String imageUrl = call.argument(StringUtils.ShareImage);
-            String content = call.argument(StringUtils.ShareContent);
+        } else if (call.method.equals(UmMethodConfig.shareWebView)) {
+            int index = call.argument(UmConfig.sharePlatformType);
+            String url = call.argument(UmConfig.shareWebUrl);
+            String title = call.argument(UmConfig.shareTitle);
+            String imageUrl = call.argument(UmConfig.shareImage);
+            String content = call.argument(UmConfig.shareContent);
 
             UMWeb web = new UMWeb(url);
             web.setTitle(title);//标题
@@ -132,8 +132,8 @@ public class FlutterumengPlugin implements MethodCallHandler, PluginRegistry.Act
                     .withMedia(web)
                     .setCallback(new UmengshareActionListener(registrar.activity(), result))//回调监听器
                     .share();
-        } else if (call.method.equals(StringMethodUtils.ShareWithBoard)) {
-            String content = call.argument(StringUtils.ShareContent);
+        } else if (call.method.equals(UmMethodConfig.shareWithBoard)) {
+            String content = call.argument(UmConfig.shareContent);
 
             UMWeb web = new UMWeb("https://www.baidu.com");
             web.setTitle(content);//标题
@@ -171,13 +171,12 @@ public class FlutterumengPlugin implements MethodCallHandler, PluginRegistry.Act
     @Override
     public boolean onActivityResult(int i, int i1, Intent intent) {
         UMShareAPI.get(mContext).onActivityResult(i, i1, intent);
-        return false;
+        return true;
     }
 
     @Override
     public boolean onRequestPermissionsResult(int i, String[] strings, int[] ints) {
         return false;
     }
-
 }
 

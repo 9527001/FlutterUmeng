@@ -221,16 +221,21 @@
 - (void)shareWithPlaformType:(UMSocialPlatformType)platformType messageObject:(UMSocialMessageObject *)messageObject  result:(FlutterResult)result {
     //调用分享接口
     [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:nil completion:^(id data, NSError *error) {
+        NSMutableDictionary *resultDic = [[NSMutableDictionary alloc] init];
+        int code = 2;
+        NSString *msg = @"分享成功";
         if (error) {
             if (error.code == 2009) {//取消
-                
-                result([NSNumber numberWithInt:1]);
-                return;
+                code = 1;
+                msg = @"取消分享";
+            }else{
+                code = 0;
+                msg = error.description;
             }
-            result([NSNumber numberWithInt:0]);
-        }else{
-            result([NSNumber numberWithInt:2]);
         }
+        resultDic[@"code"] = [NSNumber numberWithInt:code];
+        resultDic[@"msg"] = msg;
+        result(resultDic);
     }];
 }
 

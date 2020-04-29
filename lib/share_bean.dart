@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-import 'app_string.dart';
+import 'um_config.dart';
 
 class ShareBean {
   final SharePlatformType platFormType;
@@ -25,7 +25,7 @@ class ShareBean {
     return ShareBean(
         platFormType: platFormType,
         content: text,
-        appMethod: AppMethod.ShareText);
+        appMethod: UmAppMethod.share_text);
   }
 
   factory ShareBean.web(
@@ -40,7 +40,7 @@ class ShareBean {
         content: content,
         image: image,
         webUrl: url,
-        appMethod: AppMethod.ShareWebView);
+        appMethod: UmAppMethod.share_web_view);
   }
 
   factory ShareBean.image({
@@ -50,7 +50,7 @@ class ShareBean {
     return ShareBean(
         platFormType: platFormType,
         image: image,
-        appMethod: AppMethod.ShareImage);
+        appMethod: UmAppMethod.share_image);
   }
 
   factory ShareBean.imageText({
@@ -62,33 +62,33 @@ class ShareBean {
         platFormType: platFormType,
         image: image,
         content: text,
-        appMethod: AppMethod.shareImageText);
+        appMethod: UmAppMethod.share_image_text);
   }
   factory ShareBean.board({
     @required String text,
   }) {
     return ShareBean(
         content: text,
-        appMethod: AppMethod.ShareWithBoard);
+        appMethod: UmAppMethod.share_with_board);
   }
 }
 
 
 
 /*分享结果 0 失败  1 取消 2 成功*/
-enum ShareResponseType {
-  ShareResponseTypeUnknown ,
-  ShareResponseTypeFail ,
-  ShareResponseTypeCancel,
-  ShareResponseTypeSuccess,
+enum ShareResultCode {
+  unknown ,
+  failed ,
+  cancel,
+  success,
 }
 
 /*分享平台*/
 enum SharePlatformType {
-  WeChatSession , //微信好友
-  WeChatTimeLine, //微信朋友圈
-  QQ,
-  QQZone,
-  Sina,
-  DingTalk,
+  wechat , //微信好友
+  wechat_circle, //微信朋友圈
+  qq,
+  qq_zone,
+  sina,
+  dingtalk,
 }

@@ -4,11 +4,14 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:flutterumeng/share_bean.dart';
-export 'package:flutterumeng/share_bean.dart';
+import 'package:flutterumeng/share_result_bean.dart';
 
-import 'app_string.dart';
+import 'um_config.dart';
+export 'um_config.dart';
+export 'share_bean.dart';
+export 'share_result_bean.dart';
 
-class Flutterumeng {
+class FlutterUmeng {
   static const MethodChannel _channel = const MethodChannel('flutterumeng');
 
   static Future<String> get platformVersion async {
@@ -16,47 +19,47 @@ class Flutterumeng {
     return version;
   }
 
-  static Future<String> shareInitUM({
+  static Future<String> init({
     @required String appKey,
     @required String channel,
   }) async {
     Map<String, dynamic> shareMap = {
-      AppString.AppKey: appKey,
-      AppString.Channel: channel,
+      UmAppString.app_key: appKey,
+      UmAppString.channel: channel,
     };
     final String result =
-        await _channel.invokeMethod(AppMethod.ShareInitUM, shareMap);
+        await _channel.invokeMethod(UmAppMethod.share_init_um, shareMap);
     return result;
   }
 
-  static Future<String> shareInitUMAndroid({
+  static Future<String> initAndroid({
     @required String appKey,
     @required String channel,
   }) async {
     Map<String, dynamic> shareMap = {
-      AppString.AppKey: appKey,
-      AppString.Channel: channel,
+      UmAppString.app_key: appKey,
+      UmAppString.channel: channel,
     };
     if (Platform.isAndroid) {
       final String result =
-          await _channel.invokeMethod(AppMethod.ShareInitUMAndroid, shareMap);
+          await _channel.invokeMethod(UmAppMethod.share_init_um_android, shareMap);
       return result;
     }
     return '';
 
   }
 
-  static Future<String> shareInitUMIos({
+  static Future<String> initIos({
     @required String appKey,
     @required String channel,
   }) async {
     Map<String, dynamic> shareMap = {
-      AppString.AppKey: appKey,
-      AppString.Channel: channel,
+      UmAppString.app_key: appKey,
+      UmAppString.channel: channel,
     };
     if (Platform.isIOS) {
       final String result =
-          await _channel.invokeMethod(AppMethod.ShareInitUMIOS, shareMap);
+          await _channel.invokeMethod(UmAppMethod.share_init_um_ios, shareMap);
       return result;
     }
     return '';
@@ -67,87 +70,89 @@ class Flutterumeng {
     @required bool enabled,
   }) async {
     Map<String, dynamic> shareMap = {
-      AppParams.enable: enabled,
+      UmAppParams.enable: enabled,
     };
-    await _channel.invokeMethod(AppMethod.SetLogEnabled, shareMap);
+    await _channel.invokeMethod(UmAppMethod.set_log_enabled, shareMap);
   }
 
-  static Future<String> shareInitWeChat({
+  static Future<String> initWeChat({
     @required String appKey,
     @required String appSecret,
-    String redirectURL = AppString.RedirectURLContent,
+    String redirectURL = UmAppString.redirect_url_content,
   }) async {
     Map<String, dynamic> shareMap = {
-      AppString.AppKey: appKey,
-      AppString.AppSecret: appSecret,
-      AppString.RedirectURL: redirectURL,
+      UmAppString.app_key: appKey,
+      UmAppString.app_secret: appSecret,
+      UmAppString.redirect_url: redirectURL,
     };
     final String result =
-        await _channel.invokeMethod(AppMethod.ShareInitWeChat, shareMap);
+        await _channel.invokeMethod(UmAppMethod.share_init_wechat, shareMap);
     return result;
   }
 
-  static Future<String> shareInitQQ({
+  static Future<String> initQQ({
     @required String appKey,
     @required String appSecret,
-    String redirectURL = AppString.RedirectURLContent,
+    String redirectURL = UmAppString.redirect_url_content,
   }) async {
     Map<String, dynamic> shareMap = {
-      AppString.AppKey: appKey,
-      AppString.AppSecret: appSecret,
-      AppString.RedirectURL: redirectURL,
+      UmAppString.app_key: appKey,
+      UmAppString.app_secret: appSecret,
+      UmAppString.redirect_url: redirectURL,
     };
     final String result =
-        await _channel.invokeMethod(AppMethod.ShareInitQQ, shareMap);
+        await _channel.invokeMethod(UmAppMethod.share_init_qq, shareMap);
     return result;
   }
 
-  static Future<String> shareInitSina({
+  static Future<String> initSina({
     @required String appKey,
     @required String appSecret,
-    String redirectURL = AppString.RedirectURLContent,
+    String redirectURL = UmAppString.redirect_url_content,
   }) async {
     Map<String, dynamic> shareMap = {
-      AppString.AppKey: appKey,
-      AppString.AppSecret: appSecret,
-      AppString.RedirectURL: redirectURL,
+      UmAppString.app_key: appKey,
+      UmAppString.app_secret: appSecret,
+      UmAppString.redirect_url: redirectURL,
     };
     final String result =
-        await _channel.invokeMethod(AppMethod.ShareInitSina, shareMap);
+        await _channel.invokeMethod(UmAppMethod.share_init_sina, shareMap);
     return result;
   }
 
   /* 钉钉的appKey */
-  static Future<String> shareInitDingTalk({
+  static Future<String> initDingTalk({
     String appKey,
   }) async {
     Map<String, dynamic> shareMap = {
-      AppString.AppKey: appKey,
+      UmAppString.app_key: appKey,
     };
     final String result =
-        await _channel.invokeMethod(AppMethod.ShareInitDingTalk, shareMap);
+        await _channel.invokeMethod(UmAppMethod.share_init_dingtalk, shareMap);
     return result;
   }
 
-  static Future<ShareResponseType> share({ShareBean share}) async {
+  static Future<ShareResultBean> share({ShareBean share}) async {
     Map<String, dynamic> shareMap = {
-      AppParams.SharePlatformType:
+      UmAppParams.share_platform_type:
           share.platFormType == null ? 0 : share.platFormType.index,
-      AppParams.ShareTitle: share.title,
-      AppParams.ShareContent: share.content,
-      AppParams.ShareImage: share.image,
-      AppParams.ShareWebUrl: share.webUrl,
+      UmAppParams.share_title: share.title,
+      UmAppParams.share_content: share.content,
+      UmAppParams.share_image: share.image,
+      UmAppParams.share_web_url: share.webUrl,
     };
-    final int result =
+    final Map result =
         await _channel.invokeMethod(share.appMethod, shareMap);
-    if(result == 0){
-      return ShareResponseType.ShareResponseTypeFail;
-    }else if(result == 1){
-      return ShareResponseType.ShareResponseTypeCancel;
-    }else if(result == 2) {
-      return ShareResponseType.ShareResponseTypeSuccess;
+    ShareResultCode shareResponseType;
+    if(result['code'] == 0){
+      shareResponseType = ShareResultCode.failed;
+    }else if(result['code'] == 1){
+      shareResponseType = ShareResultCode.cancel;
+    }else if(result['code'] == 2) {
+      shareResponseType = ShareResultCode.success;
     }else {
-      return ShareResponseType.ShareResponseTypeUnknown;
+      shareResponseType = ShareResultCode.unknown;
     }
+    return ShareResultBean(code: shareResponseType,msg: result['msg']);
   }
 }
