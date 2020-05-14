@@ -36,27 +36,25 @@ android {
     lintOptions {
         disable 'InvalidPackage'
     }
-    sourceSets {
-        main.java.srcDirs += 'src/main/java'
+    buildTypes {
+        release {
+            consumerProguardFiles "proguard-rules.pro"
+        }
     }
-
-    dependencies {
-        api 'com.umeng.umsdk:common:2.2.5'
-        api 'com.umeng.umsdk:share-core:7.0.0'
-        api 'com.umeng.umsdk:share-board:7.0.0'
-
-        api 'com.umeng.umsdk:share-qq:7.0.0'
-        api 'com.umeng.umsdk:share-wx:7.0.0'
-        api 'com.umeng.umsdk:share-sina:7.0.0'
-        api 'com.umeng.umsdk:share-dingding:7.0.0'
-        api 'com.alibaba.android:ddsharesdk:1.1.0'
-        api 'com.sina.weibo.sdk:core:4.4.3:openDefaultRelease@aar'
-    }
-
 }
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'androidx.appcompat:appcompat:+'
     implementation 'androidx.constraintlayout:constraintlayout:+'
+    api 'com.umeng.umsdk:common:2.2.5'
+    api 'com.umeng.umsdk:share-core:7.0.0'
+    api 'com.umeng.umsdk:share-board:7.0.0'
+
+    api 'com.umeng.umsdk:share-qq:7.0.0'
+    api 'com.umeng.umsdk:share-wx:7.0.0'
+    api 'com.umeng.umsdk:share-sina:7.0.0'
+    api 'com.umeng.umsdk:share-dingding:7.0.0'
+    api 'com.alibaba.android:ddsharesdk:1.1.0'
+    api 'com.sina.weibo.sdk:core:4.4.3:openDefaultRelease@aar'
 }
