@@ -67,8 +67,6 @@
             </intent-filter>
         </activity-alias>
 
-
-
     </application>
 <!--权限配置-->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
