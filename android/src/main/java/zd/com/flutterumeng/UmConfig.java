@@ -7,6 +7,7 @@ class UmConfig {
     static String redirectURL = "RedirectURL";
     static String redirectURLContent = "http://mobile.umeng.com/social";
     static String channel = "channel";
+    static String file_provider = "file_provider";
 
     /*params*/
     static String sharePlatformType = "platFormType";

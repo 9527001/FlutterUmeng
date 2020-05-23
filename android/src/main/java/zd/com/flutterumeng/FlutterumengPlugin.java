@@ -13,6 +13,7 @@ import com.umeng.socialize.media.UMWeb;
 import com.umeng.socialize.uploadlog.UMLog;
 
 import androidx.annotation.NonNull;
+
 import io.flutter.Log;
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
@@ -76,7 +77,9 @@ public class FlutterumengPlugin implements MethodCallHandler, PluginRegistry.Act
         } else if (call.method.equals(UmMethodConfig.shareInitQQ)) {
             String appID = call.argument(UmConfig.appKey);
             String appKey = call.argument(UmConfig.appSecret);
+            String fileProviderr = call.argument(UmConfig.file_provider);
             PlatformConfig.setQQZone(appID, appKey);
+            PlatformConfig.setQQFileProvider(fileProviderr);
             System.out.println("Qq初始化成功");
 
         } else if (call.method.equals(UmMethodConfig.shareInitSina)) {
