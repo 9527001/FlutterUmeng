@@ -18,6 +18,6 @@ void main() {
   });
 
   test('getPlatformVersion', () async {
-    expect(await Flutterumeng.platformVersion, '42');
+    expect(await FlutterUmeng.platformVersion, '42');
   });
 }

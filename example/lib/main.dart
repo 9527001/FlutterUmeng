@@ -23,22 +23,22 @@ class _MyAppState extends State<MyApp> {
 
   // Platform messages are asynchronous, so we initialize in an async method.
   Future<void> initPlatformState() async {
-    Flutterumeng.setLogEnabled(enabled: true);
+    FlutterUmeng.setLogEnabled(enabled: true);
 
-    Flutterumeng.shareInitUMIos(
+    FlutterUmeng.initIos(
         appKey: '5e9ad231978eea083f0c79af', channel: 'appstore');
-    Flutterumeng.shareInitUMAndroid(
+    FlutterUmeng.initAndroid(
         appKey: '5e9e8f0b978eea083f0c813e', channel: 'android');
-    Flutterumeng.shareInitDingTalk(appKey: 'dingoaiex4ka6vshseqky9');
-    Flutterumeng.shareInitQQ(
+    FlutterUmeng.initDingTalk(appKey: 'dingoaiex4ka6vshseqky9');
+    FlutterUmeng.initQQ(
         appKey: '1110443120',
         appSecret: 'aYYjmc3FoH7Va8E7',
         redirectURL: '');
-    Flutterumeng.shareInitWeChat(
+    FlutterUmeng.initWeChat(
         appKey: 'wxffb1c9036944dc36',
         appSecret: "0fd7719d0a12c5f795d7bb67d5db034d",
         redirectURL: 'https://www.reading-china.com/');
-    Flutterumeng.shareInitSina(
+    FlutterUmeng.initSina(
         appKey: '655199122',
         appSecret: "17dfef507567f6f038e20ef2a2b1f1ca",
         redirectURL: 'https://www.baidu.com');
@@ -46,7 +46,7 @@ class _MyAppState extends State<MyApp> {
     String platformVersion;
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
-      platformVersion = await Flutterumeng.platformVersion;
+      platformVersion = await FlutterUmeng.platformVersion;
     } on PlatformException {
       platformVersion = 'Failed to get platform version.';
     }
@@ -79,9 +79,9 @@ class _MyAppState extends State<MyApp> {
                   ),
                 ),
                 onTap: () {
-                  Flutterumeng.share(
+                  FlutterUmeng.share(
                     share: ShareBean.text(
-                        platFormType: SharePlatformType.DingTalk, text: '123'),
+                        platFormType: SharePlatformType.dingtalk, text: '123'),
                   );
                 },
               ),
@@ -93,9 +93,9 @@ class _MyAppState extends State<MyApp> {
                   ),
                 ),
                 onTap: () {
-                  Flutterumeng.share(
+                  FlutterUmeng.share(
                     share: ShareBean.image(
-                        platFormType: SharePlatformType.DingTalk,
+                        platFormType: SharePlatformType.dingtalk,
                         image:
                         'https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1587181134&di=012a3e34f388d1c9b8fab346fac09587&src=http://c.hiphotos.baidu.com/zhidao/pic/item/d009b3de9c82d1587e249850820a19d8bd3e42a9.jpg'),
                   );
@@ -109,9 +109,9 @@ class _MyAppState extends State<MyApp> {
                   ),
                 ),
                 onTap: () {
-                  Flutterumeng.share(
+                  FlutterUmeng.share(
                     share: ShareBean.imageText(
-                        platFormType: SharePlatformType.DingTalk,
+                        platFormType: SharePlatformType.dingtalk,
                         text: '123',
                         image:
                         'https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1587181134&di=012a3e34f388d1c9b8fab346fac09587&src=http://c.hiphotos.baidu.com/zhidao/pic/item/d009b3de9c82d1587e249850820a19d8bd3e42a9.jpg'),
@@ -126,9 +126,9 @@ class _MyAppState extends State<MyApp> {
                   ),
                 ),
                 onTap: () {
-                  Flutterumeng.share(
+                  FlutterUmeng.share(
                     share: ShareBean.web(
-                      platFormType: SharePlatformType.DingTalk,
+                      platFormType: SharePlatformType.dingtalk,
                       title: '标题',
                       content: '副标题',
                       image:
@@ -146,31 +146,14 @@ class _MyAppState extends State<MyApp> {
                   ),
                 ),
                 onTap: () async {
-                  ShareResponseType shareResponseType =
-                  await Flutterumeng.share(
+                  ShareResultBean shareResultBean =
+                  await FlutterUmeng.share(
                     share: ShareBean.board(
                       text: '测试',
                     ),
                   );
-                  String result;
-                  switch (shareResponseType) {
-                    case ShareResponseType.ShareResponseTypeUnknown:
-                      result = '分享结果:未知';
-                      break;
-                    case ShareResponseType.ShareResponseTypeFail:
-                      result = '分享结果:失败';
-                      break;
-                    case ShareResponseType.ShareResponseTypeCancel:
-                      result = '分享结果:取消';
-
-                      break;
-                    case ShareResponseType.ShareResponseTypeSuccess:
-                      result = '分享结果:成功';
-
-                      break;
-                  }
                   Fluttertoast.showToast(
-                      msg: result,
+                      msg: shareResultBean.msg ?? '',
                       toastLength: Toast.LENGTH_SHORT,
                       gravity: ToastGravity.CENTER,
                       timeInSecForIosWeb: 1,
