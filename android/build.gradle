@@ -41,12 +41,6 @@ android {
             consumerProguardFiles "proguard-rules.pro"
         }
     }
-
-    repositories {
-        flatDir {
-            dirs 'libs','../flutterumeng/libs'
-        }
-    }
 }
 
 dependencies {
