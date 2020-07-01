@@ -44,7 +44,7 @@ android {
 
     repositories {
         flatDir {
-            dirs 'libs',flutterumeng
+            dirs 'libs'
         }
     }
 }
