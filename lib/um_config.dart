@@ -4,6 +4,7 @@ class UmAppString {
   static const String redirect_url = 'RedirectURL';
   static const String redirect_url_content = 'http://mobile.umeng.com/social';
   static const String channel = 'channel';
+  static const String file_provider = 'file_provider';
 }
 
 class UmAppParams {
