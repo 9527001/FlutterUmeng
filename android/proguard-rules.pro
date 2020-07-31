@@ -111,3 +111,12 @@
 -keep class com.linkedin.** { *; }
 -keep class com.android.dingtalk.share.ddsharemodule.** { *; }
 -keepattributes Signature
+
+# umeng混淆
+-keep class com.uc.** {*;}
+-keep class com.zui.** {*;}
+-keep class com.miui.** {*;}
+-keep class com.heytap.** {*;}
+-keep class a.** {*;}
+-keep class com.vivo.** {*;}
+# umeng混淆
