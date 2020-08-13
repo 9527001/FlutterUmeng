@@ -17,7 +17,7 @@ dependencies:
   flutterumeng:
     path: ../
 
-  fluttertoast: ^4.0.0
+  fluttertoast: ^7.0.0
 
 dev_dependencies:
   flutter_test:

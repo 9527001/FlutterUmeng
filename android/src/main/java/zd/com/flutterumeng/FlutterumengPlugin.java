@@ -1,5 +1,6 @@
 package zd.com.flutterumeng;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 
@@ -10,11 +11,9 @@ import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.media.UMImage;
 import com.umeng.socialize.media.UMWeb;
-import com.umeng.socialize.uploadlog.UMLog;
 
 import androidx.annotation.NonNull;
 
-import io.flutter.Log;
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
@@ -28,22 +27,18 @@ import io.flutter.plugin.common.PluginRegistry.Registrar;
 public class FlutterumengPlugin implements MethodCallHandler, PluginRegistry.ActivityResultListener, PluginRegistry.RequestPermissionsResultListener {
 
     private Registrar registrar;
-    private MethodChannel channel;
-    private Context mContext;
+    static MethodChannel channel;
+    private final Activity activity;
 
-    public FlutterumengPlugin(Registrar registrar, MethodChannel channel) {
+
+    public FlutterumengPlugin(Registrar registrar, Activity activity) {
         this.registrar = registrar;
-        this.channel = channel;
-    }
-
-
-    public FlutterumengPlugin(Context mContext) {
-        this.mContext = mContext;
+        this.activity = activity;
     }
 
     public static void registerWith(Registrar registrar) {
-        final MethodChannel channel = new MethodChannel(registrar.messenger(), "flutterumeng");
-        channel.setMethodCallHandler(new FlutterumengPlugin(registrar, channel));
+        channel = new MethodChannel(registrar.messenger(), "flutterumeng");
+        channel.setMethodCallHandler(new FlutterumengPlugin(registrar, registrar.activity()));
     }
 
     @Override
@@ -173,7 +168,7 @@ public class FlutterumengPlugin implements MethodCallHandler, PluginRegistry.Act
 
     @Override
     public boolean onActivityResult(int i, int i1, Intent intent) {
-        UMShareAPI.get(mContext).onActivityResult(i, i1, intent);
+        UMShareAPI.get(activity.getApplicationContext()).onActivityResult(i, i1, intent);
         return true;
     }
 
