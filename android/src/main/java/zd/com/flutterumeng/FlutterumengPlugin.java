@@ -96,22 +96,24 @@ public class FlutterumengPlugin implements MethodCallHandler, PluginRegistry.Act
         } else if (call.method.equals(UmMethodConfig.shareImage)) {
             int index = call.argument(UmConfig.sharePlatformType);
             String imageUrl = call.argument(UmConfig.shareImage);
-
+            UMImage image = new UMImage(registrar.activity(), imageUrl);
+            image.setThumb(new UMImage(registrar.activity(), imageUrl));
             new ShareAction(registrar.activity())
                     .setPlatform(onShareType(index))//传入平台
                     .withText("")//分享内容
-                    .withMedia(new UMImage(registrar.activity(), imageUrl))
+                    .withMedia(image)
                     .setCallback(new UmengshareActionListener(registrar.activity(), result))//回调监听器
                     .share();
         } else if (call.method.equals(UmMethodConfig.shareImageText)) {
             int index = call.argument(UmConfig.sharePlatformType);
             String imageUrl = call.argument(UmConfig.shareImage);
             String content = call.argument(UmConfig.shareContent);
-
+            UMImage image = new UMImage(registrar.activity(), imageUrl);
+            image.setThumb(new UMImage(registrar.activity(), imageUrl));
             new ShareAction(registrar.activity())
                     .setPlatform(onShareType(index))//传入平台
                     .withText(content)//分享内容
-                    .withMedia(new UMImage(registrar.activity(), imageUrl))
+                    .withMedia(image)
                     .setCallback(new UmengshareActionListener(registrar.activity(), result))//回调监听器
                     .share();
         } else if (call.method.equals(UmMethodConfig.shareWebView)) {
