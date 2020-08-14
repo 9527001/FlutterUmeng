@@ -21,7 +21,7 @@ A new Flutter  umeng plugin.
   s.dependency 'UMCCommon','2.1.4'
   
   # 分享依赖库
-  s.dependency 'UMCSecurityPlugins','1.0.6'
+#  s.dependency 'UMCSecurityPlugins','1.0.6'
   
   # 日志打印
   s.dependency 'UMCCommonLog','1.0.0'

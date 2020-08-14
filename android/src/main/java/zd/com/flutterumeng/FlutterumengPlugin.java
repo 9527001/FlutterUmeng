@@ -1,5 +1,6 @@
 package zd.com.flutterumeng;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 
@@ -10,11 +11,9 @@ import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.media.UMImage;
 import com.umeng.socialize.media.UMWeb;
-import com.umeng.socialize.uploadlog.UMLog;
 
 import androidx.annotation.NonNull;
 
-import io.flutter.Log;
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
@@ -28,22 +27,18 @@ import io.flutter.plugin.common.PluginRegistry.Registrar;
 public class FlutterumengPlugin implements MethodCallHandler, PluginRegistry.ActivityResultListener, PluginRegistry.RequestPermissionsResultListener {
 
     private Registrar registrar;
-    private MethodChannel channel;
-    private Context mContext;
+    static MethodChannel channel;
+    private final Activity activity;
 
-    public FlutterumengPlugin(Registrar registrar, MethodChannel channel) {
+
+    public FlutterumengPlugin(Registrar registrar, Activity activity) {
         this.registrar = registrar;
-        this.channel = channel;
-    }
-
-
-    public FlutterumengPlugin(Context mContext) {
-        this.mContext = mContext;
+        this.activity = activity;
     }
 
     public static void registerWith(Registrar registrar) {
-        final MethodChannel channel = new MethodChannel(registrar.messenger(), "flutterumeng");
-        channel.setMethodCallHandler(new FlutterumengPlugin(registrar, channel));
+        channel = new MethodChannel(registrar.messenger(), "flutterumeng");
+        channel.setMethodCallHandler(new FlutterumengPlugin(registrar, registrar.activity()));
     }
 
     @Override
@@ -101,22 +96,24 @@ public class FlutterumengPlugin implements MethodCallHandler, PluginRegistry.Act
         } else if (call.method.equals(UmMethodConfig.shareImage)) {
             int index = call.argument(UmConfig.sharePlatformType);
             String imageUrl = call.argument(UmConfig.shareImage);
-
+            UMImage image = new UMImage(registrar.activity(), imageUrl);
+            image.setThumb(new UMImage(registrar.activity(), imageUrl));
             new ShareAction(registrar.activity())
                     .setPlatform(onShareType(index))//传入平台
                     .withText("")//分享内容
-                    .withMedia(new UMImage(registrar.activity(), imageUrl))
+                    .withMedia(image)
                     .setCallback(new UmengshareActionListener(registrar.activity(), result))//回调监听器
                     .share();
         } else if (call.method.equals(UmMethodConfig.shareImageText)) {
             int index = call.argument(UmConfig.sharePlatformType);
             String imageUrl = call.argument(UmConfig.shareImage);
             String content = call.argument(UmConfig.shareContent);
-
+            UMImage image = new UMImage(registrar.activity(), imageUrl);
+            image.setThumb(new UMImage(registrar.activity(), imageUrl));
             new ShareAction(registrar.activity())
                     .setPlatform(onShareType(index))//传入平台
                     .withText(content)//分享内容
-                    .withMedia(new UMImage(registrar.activity(), imageUrl))
+                    .withMedia(image)
                     .setCallback(new UmengshareActionListener(registrar.activity(), result))//回调监听器
                     .share();
         } else if (call.method.equals(UmMethodConfig.shareWebView)) {
@@ -173,7 +170,7 @@ public class FlutterumengPlugin implements MethodCallHandler, PluginRegistry.Act
 
     @Override
     public boolean onActivityResult(int i, int i1, Intent intent) {
-        UMShareAPI.get(mContext).onActivityResult(i, i1, intent);
+        UMShareAPI.get(activity.getApplicationContext()).onActivityResult(i, i1, intent);
         return true;
     }
 

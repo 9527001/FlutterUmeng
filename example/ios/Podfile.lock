@@ -1,0 +1,63 @@
+PODS:
+  - Flutter (1.0.0)
+  - fluttertoast (0.0.2):
+    - Flutter
+  - flutterumeng (0.0.1):
+    - Flutter
+    - UMCCommon (= 2.1.4)
+    - UMCCommonLog (= 1.0.0)
+    - UMCShare/Social/DingDing (= 6.9.8)
+    - UMCShare/Social/ReducedQQ (= 6.9.8)
+    - UMCShare/Social/ReducedSina (= 6.9.8)
+    - UMCShare/Social/ReducedWeChat (= 6.9.8)
+    - UMCShare/UI (= 6.9.8)
+  - UMCCommon (2.1.4)
+  - UMCCommonLog (1.0.0)
+  - UMCShare/Core (6.9.8):
+    - UMCCommon
+  - UMCShare/Social/DingDing (6.9.8):
+    - UMCCommon
+    - UMCShare/Core
+  - UMCShare/Social/ReducedQQ (6.9.8):
+    - UMCCommon
+    - UMCShare/Core
+  - UMCShare/Social/ReducedSina (6.9.8):
+    - UMCCommon
+    - UMCShare/Core
+  - UMCShare/Social/ReducedWeChat (6.9.8):
+    - UMCCommon
+    - UMCShare/Core
+  - UMCShare/UI (6.9.8):
+    - UMCCommon
+    - UMCShare/Core
+
+DEPENDENCIES:
+  - Flutter (from `Flutter`)
+  - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
+  - flutterumeng (from `.symlinks/plugins/flutterumeng/ios`)
+
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - UMCCommon
+    - UMCCommonLog
+    - UMCShare
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: Flutter
+  fluttertoast:
+    :path: ".symlinks/plugins/fluttertoast/ios"
+  flutterumeng:
+    :path: ".symlinks/plugins/flutterumeng/ios"
+
+SPEC CHECKSUMS:
+  Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
+  fluttertoast: b644586ef3b16f67fae9a1f8754cef6b2d6b634b
+  flutterumeng: 9f68f183d9c6ef2513e4d1bfb4bc7c1acba6246f
+  UMCCommon: b0703b0053323f598e01670ea702b8eb1e66e611
+  UMCCommonLog: 05a2d5de21858e3d870551562cff405c1366d244
+  UMCShare: a250203b34a56cde25cc4c28335449b542f0255d
+
+PODFILE CHECKSUM: 4679b03f3af6224cc65cbd9658075ac4d13cee97
+
+COCOAPODS: 1.8.4

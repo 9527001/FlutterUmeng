@@ -9,10 +9,21 @@ buildscript {
     }
 }
 
+
+def flutterProjectRoot = rootProject.projectDir.parentFile.toPath()
+def plugins = new Properties()
+def pluginsFile = new File(flutterProjectRoot.toFile(), '.flutter-plugins')
+if (pluginsFile.exists()) {
+    pluginsFile.withReader('UTF-8') { reader -> plugins.load(reader) }
+}
+
 allprojects {
     repositories {
         google()
         jcenter()
+        flatDir {
+            dirs "${plugins.get("flutterumeng")}android/libs"
+        }
     }
 }
 
