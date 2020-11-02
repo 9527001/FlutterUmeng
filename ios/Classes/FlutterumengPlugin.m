@@ -207,6 +207,31 @@
             
         }];
         
+    }else if ([MethodShareMiniProgram isEqualToString:methodString]){
+        
+        
+        UMSocialPlatformType platformType = [self socialPlatformTypeWithCustomSharePlatformType:params[SharePlatformType]];
+
+        NSString * shareTitle = params[ShareTitle];
+        NSString * shareContent = params[ShareContent];//存储小程序ID
+        id shareImage = params[ShareImage];
+        NSString * shareWebUrl = params[ShareWebUrl];
+        
+        //支持分享小程序类型消息至会话，暂不支持分享至朋友圈。
+        //创建分享消息对象
+        UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
+
+        UMShareMiniProgramObject *shareObject = [UMShareMiniProgramObject shareObjectWithTitle:shareTitle descr:@"小程序内容描述" thumImage:[UIImage imageNamed:@"icon"]];
+
+        shareObject.webpageUrl = shareWebUrl;//兼容微信低版本网页地址
+        shareObject.userName = shareContent;//"小程序username，如 gh_3ac2059ac66f
+    //    shareObject.path = @"小程序页面路径，如 pages/page10007/page10007";
+        messageObject.shareObject = shareObject;
+        shareObject.hdImageData = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"logo" ofType:@"png"]];
+        shareObject.miniProgramType = UShareWXMiniProgramTypeRelease; // 可选体验版和开发板
+        [self shareWithPlaformType:platformType messageObject:messageObject result:result];
+        
+        
     }else if ([@"getPlatformVersion" isEqualToString:methodString]){
         result([@"iOS " stringByAppendingString:[[UIDevice currentDevice] systemVersion]]);
     }

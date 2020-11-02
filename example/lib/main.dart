@@ -142,6 +142,24 @@ class _MyAppState extends State<MyApp> {
                 child: Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: Text(
+                    '小程序测试',
+                  ),
+                ),
+                onTap: () {
+                  FlutterUmeng.share(
+                    share: ShareBean.miniProgram(
+                      platFormType: SharePlatformType.wechat,
+                      title: '小程序标题',
+                      userName: 'gh_fc260d5d7391',
+                      url: 'https://www.baidu.com',
+                    ),
+                  );
+                },
+              ),
+              GestureDetector(
+                child: Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Text(
                     '固定面板，测试使用',
                   ),
                 ),

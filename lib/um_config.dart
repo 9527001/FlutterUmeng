@@ -22,6 +22,7 @@ class UmAppMethod {
   static const String share_image = 'shareImage';
   static const String share_image_text = 'shareImageText';
   static const String share_web_view = 'shareWebView';
+  static const String share_mini_program = 'shareMiniProgram';
   static const String share_with_board = "shareWithBoard";
 
 
