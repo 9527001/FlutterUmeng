@@ -5,12 +5,16 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.umeng.commonsdk.UMConfigure;
+import com.umeng.commonsdk.debug.E;
 import com.umeng.socialize.PlatformConfig;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.media.UMImage;
+import com.umeng.socialize.media.UMMin;
 import com.umeng.socialize.media.UMWeb;
+
+import java.util.HashMap;
 
 import androidx.annotation.NonNull;
 
@@ -130,6 +134,29 @@ public class FlutterumengPlugin implements MethodCallHandler, PluginRegistry.Act
             new ShareAction(registrar.activity())
                     .setPlatform(onShareType(index))//传入平台
                     .withMedia(web)
+                    .setCallback(new UmengshareActionListener(registrar.activity(), result))//回调监听器
+                    .share();
+        } else if (call.method.equals(UmMethodConfig.shareMiniProgram)) {
+            Integer index = call.argument(UmConfig.sharePlatformType);
+            String url = call.argument(UmConfig.shareWebpageUrl);
+            String title = call.argument(UmConfig.shareTitle);
+            String content = call.argument(UmConfig.shareContent);
+            byte[] hdImageData = call.argument(UmConfig.shareHDImageData);
+            HashMap<String, E> mpJson = call.argument(UmConfig.shareMPJsonStr);
+            String userName = call.argument(UmConfig.shareUserName);
+            String path = call.argument(UmConfig.sharePath);
+
+            UMMin umMin = new UMMin(url); //兼容低版本的网页链接
+            umMin.setTitle(title); // 小程序消息title
+            umMin.setDescription(content); // 小程序消息描述
+            umMin.setThumb(new UMImage(registrar.activity(), hdImageData)); // 小程序消息封面图片
+            umMin.setPath(path); //小程序页面路径
+            umMin.setUserName(userName); // 小程序原始id,在微信平台查询
+
+
+            new ShareAction(registrar.activity())
+                    .setPlatform(onShareType(index.intValue()))//传入平台
+                    .withMedia(umMin)
                     .setCallback(new UmengshareActionListener(registrar.activity(), result))//回调监听器
                     .share();
         } else if (call.method.equals(UmMethodConfig.shareWithBoard)) {

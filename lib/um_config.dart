@@ -15,6 +15,14 @@ class UmAppParams {
   static const String share_web_url = 'webUrl';
   static const String share_app_method = 'appMethod';
   static const String enable = 'enable';
+
+  static const String share_mp_json_str = "mpJsonStr";
+  static const String share_web_page_url = "webpageUrl";
+  static const String share_user_name = "userName";
+  static const String share_path = "path";
+  static const String share_hd_image_data = "hdImageData";//小程序消息封面图片，小于128k
+  static const String share_mini_program_type = "miniProgramType";
+  static const String share_with_share_ticket = "withShareTicket";
 }
 
 class UmAppMethod {
@@ -24,7 +32,6 @@ class UmAppMethod {
   static const String share_web_view = 'shareWebView';
   static const String share_mini_program = 'shareMiniProgram';
   static const String share_with_board = "shareWithBoard";
-
 
   static const String share_init_um = 'shareInitUM';
   static const String share_init_um_ios = 'shareInitUMIOS';

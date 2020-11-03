@@ -151,7 +151,7 @@ class _MyAppState extends State<MyApp> {
                       platFormType: SharePlatformType.wechat,
                       title: '小程序标题',
                       userName: 'gh_fc260d5d7391',
-                      url: 'https://www.baidu.com',
+                      webPageUrl: 'https://www.baidu.com',
                     ),
                   );
                 },

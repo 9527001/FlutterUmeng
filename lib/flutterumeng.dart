@@ -142,6 +142,8 @@ class FlutterUmeng {
       UmAppParams.share_content: share.content,
       UmAppParams.share_image: share.image,
       UmAppParams.share_web_url: share.webUrl,
+      UmAppParams.share_hd_image_data:share.hdImageData,
+      UmAppParams.share_mp_json_str:share.miniJsonStr,
     };
     final Map result =
         await _channel.invokeMethod(share.appMethod, shareMap);

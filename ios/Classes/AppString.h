@@ -18,6 +18,15 @@ static const NSString *  ShareWebUrl = @"webUrl";
 static const NSString *  ShareAppMethod = @"appMethod";
 static const NSString * StringParamsEnable = @"enable";
 
+//miniProgram
+static const NSString * ShareMPJsonStr = @"mpJsonStr";
+static const NSString * ShareWebpageUrl = @"webpageUrl";
+static const NSString * ShareUserName = @"userName";
+static const NSString * SharePath = @"path";
+static const NSString * ShareHDImageData = @"hdImageData";//小程序消息封面图片，小于128k
+static const NSString * ShareMiniProgramType = @"miniProgramType";
+static const NSString * ShareWithShareTicket = @"withShareTicket";
+
 
 //初始化配置
 static const NSString *  AppKey = @"AppKey";

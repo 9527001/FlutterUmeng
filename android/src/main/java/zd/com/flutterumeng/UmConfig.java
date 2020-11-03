@@ -17,6 +17,15 @@ class UmConfig {
     static String shareWebUrl = "webUrl";
     static String shareAppMethod = "appMethod";
     static String enable = "enable";
+
+    //miniProgram
+    static String shareMPJsonStr = "mpJsonStr";
+    static String shareWebpageUrl = "webpageUrl";
+    static String shareUserName = "userName";
+    static String sharePath = "path";
+    static String shareHDImageData = "hdImageData";
+    static String shareMiniProgramType = "miniProgramType";
+    static String shareWithShareTicket = "withShareTicket";
 }
 
 
@@ -29,7 +38,7 @@ class UmMethodConfig {
     static String shareImageText = "shareImageText";
     static String shareWebView = "shareWebView";
     static String shareWithBoard = "shareWithBoard";
-
+    static String shareMiniProgram = "shareMiniProgram";//小程序
 
     static String shareInitUM = "shareInitUMAndroid";
     static String shareInitWeChat = "shareInitWeChat";
