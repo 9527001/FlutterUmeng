@@ -66,11 +66,11 @@ class ShareBean {
     @required SharePlatformType platFormType,
     @required String title,
     @required String content,
-    String image,
+    String image,//在ios上显示的封面图片
     @required String webPageUrl, //低版本微信网页链接
     @required String userName, //小程序username，如 gh_3ac2059ac66f
     @required String path, //小程序页面路径，如 pages/page10007/page10007
-    @required Uint8List hdImageDataIos, // 小程序新版本的预览图 128k iOS data
+    @required Uint8List hdImageDataIos, // 小程序新版本的预览图 128k iOS data 目前传null
     @required String hdImageDataAndroid, // 小程序新版本的预览图 128k android 都可以 ，目前仅支持string
     /**
         分享小程序的版本（正式，开发，体验）
