@@ -232,8 +232,8 @@
         shareObject.webpageUrl = webpageUrl;//兼容微信低版本网页地址
         shareObject.userName = userName;//"小程序username，如 gh_3ac2059ac66f
         shareObject.path = path;//小程序页面路径，如 pages/page10007/page10007
-        if(hdImageData){
-        shareObject.hdImageData = hdImageData.data;
+        if([hdImageData isKindOfClass:[FlutterStandardTypedData class]]){
+            shareObject.hdImageData = hdImageData.data;
         }
         shareObject.miniProgramType = miniProgramType.intValue; // 可选体验版和开发板
         shareObject.withShareTicket = withShareTicket.boolValue;

@@ -147,11 +147,18 @@ class _MyAppState extends State<MyApp> {
                 ),
                 onTap: () {
                   FlutterUmeng.share(
-                    share: ShareBean.miniProgram(
+                    share:ShareBean.miniProgram(
                       platFormType: SharePlatformType.wechat,
-                      title: '小程序标题',
+                      title: '你多久没开心了',
+                      content: '名片内容',
+                      image: 'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1689053532,4230915864&fm=26&gp=0.jpg',
+                      webPageUrl: 'www.baidu.com',
                       userName: 'gh_fc260d5d7391',
-                      webPageUrl: 'https://www.baidu.com',
+                      path: 'page/home',
+                      hdImageDataIos: null,
+                      hdImageDataAndroid: 'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1689053532,4230915864&fm=26&gp=0.jpg',
+                      miniProgramType: 1,
+                      withShareTicket: true,
                     ),
                   );
                 },
