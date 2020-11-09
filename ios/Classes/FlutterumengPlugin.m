@@ -33,7 +33,7 @@
     //6.3的新的API调用，是为了兼容国外平台(例如:新版facebookSDK,VK等)的调用[如果用6.2的api调用会没有回调],对国内平台没有影响
     BOOL result = [[UMSocialManager defaultManager] handleOpenURL:url sourceApplication:sourceApplication annotation:annotation];
     if (!result) {
-         // 其他如支付等SDK的回调
+        // 其他如支付等SDK的回调
     }
     return result;
 }
@@ -188,7 +188,7 @@
         
     }else if ([MethodShareWithBoard isEqualToString:methodString]){
         
-
+        
         //显示分享面板
         [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType, NSDictionary *userInfo) {
             
@@ -211,23 +211,23 @@
         
         
         UMSocialPlatformType platformType = [self socialPlatformTypeWithCustomSharePlatformType:params[SharePlatformType]];
-
+        
         NSString * shareTitle = params[ShareTitle];
         NSString * shareContent = params[ShareContent];//存储小程序ID
         NSString * shareImage = params[ShareImage];//暂时只支持url
         FlutterStandardTypedData * hdImageData = params[ShareHDImageData];
-    
+        
         NSDictionary *dic = params[ShareMPJsonStr];
         NSString * webpageUrl = dic[ShareWebpageUrl];
         NSString * userName = dic[ShareUserName];
         NSString * path = dic[SharePath];
         NSNumber * miniProgramType = dic[ShareMiniProgramType];
         NSNumber * withShareTicket = dic[ShareWithShareTicket];
-
+        
         //支持分享小程序类型消息至会话，暂不支持分享至朋友圈。
         //创建分享消息对象
         UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
-
+        
         UMShareMiniProgramObject *shareObject = [UMShareMiniProgramObject shareObjectWithTitle:shareTitle descr:shareContent thumImage:shareImage];
         shareObject.webpageUrl = webpageUrl;//兼容微信低版本网页地址
         shareObject.userName = userName;//"小程序username，如 gh_3ac2059ac66f
@@ -260,12 +260,12 @@
         int code = 2;
         NSString *msg = @"分享成功";
         if (error) {
-            if (error.code == 2009) {//取消
+            if (error.code == UMSocialPlatformErrorType_Cancel) {//取消
                 code = 1;
                 msg = @"取消分享";
             }else{
                 code = 0;
-                msg = error.description;
+                msg = error.userInfo[@"message"];
             }
         }
         resultDic[@"code"] = [NSNumber numberWithInt:code];

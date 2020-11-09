@@ -37,8 +37,17 @@ public class UmengshareActionListener implements UMShareListener {
     public void onError(SHARE_MEDIA share_media, Throwable throwable) {
         Map<String, Object> resultMap = new HashMap<>();
         resultMap.put("code", 0);
-        resultMap.put("msg", TextUtils.isEmpty(throwable.getMessage()) ? "未知错误，分享失败" : throwable.getMessage());
+        resultMap.put("msg", TextUtils.isEmpty(throwable.getMessage()) ? "未知错误，分享失败" : getMessage(throwable));
         result.success(resultMap);
+    }
+
+    private String getMessage(Throwable throwable) {
+        if (TextUtils.isEmpty(throwable.getMessage())) return "未知错误，分享失败";
+        String msg = throwable.getMessage();
+        if (msg.contains("错误信息：")) {
+            return msg.substring(msg.indexOf("错误信息：") + 5);
+        }
+        return msg;
     }
 
     @Override
