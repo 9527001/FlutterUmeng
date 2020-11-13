@@ -88,12 +88,12 @@
     }
     else if ([StringMethodIsInstall isEqualToString:methodString]){
         BOOL success = [[UMSocialManager defaultManager] isInstall:[self socialPlatformTypeWithCustomSharePlatformType:params[SharePlatformType]]];
-        result(success);
+        result([NSNumber numberWithBool:success]);
         NSLog(@"是否安装了应用");
     }
     else if ([StringMethodIsSupport isEqualToString:methodString]){
         BOOL success = [[UMSocialManager defaultManager] isSupport:[self socialPlatformTypeWithCustomSharePlatformType:params[SharePlatformType]]];
-        result(success);
+        result([NSNumber numberWithBool:success]);
         NSLog(@"是否支持分享");
     }
     else if ([MethodShareInitWeChat isEqualToString:methodString]){
