@@ -128,12 +128,14 @@ class MiniProgramBean {
   }
 }
 
-/*分享结果 0 失败  1 取消 2 成功*/
+/*分享结果 0 失败  1 取消 2 成功,未安装,不支持*/
 enum ShareResultCode {
   unknown,
   failed,
   cancel,
   success,
+  uninstall,
+  notSupport,
 }
 
 /*分享平台*/

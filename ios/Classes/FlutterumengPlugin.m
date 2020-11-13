@@ -85,7 +85,18 @@
         [UMConfigure setLogEnabled:[enabled boolValue]];
         NSLog(@"日志开启");
         
-    }else if ([MethodShareInitWeChat isEqualToString:methodString]){
+    }
+    else if ([StringMethodIsInstall isEqualToString:methodString]){
+        BOOL success = [[UMSocialManager defaultManager] isInstall:[self socialPlatformTypeWithCustomSharePlatformType:params[SharePlatformType]]];
+        result(success);
+        NSLog(@"是否安装了应用");
+    }
+    else if ([StringMethodIsSupport isEqualToString:methodString]){
+        BOOL success = [[UMSocialManager defaultManager] isSupport:[self socialPlatformTypeWithCustomSharePlatformType:params[SharePlatformType]]];
+        result(success);
+        NSLog(@"是否支持分享");
+    }
+    else if ([MethodShareInitWeChat isEqualToString:methodString]){
         /* 设置微信的appKey和appSecret */
         NSString * appkey = params[AppKey];
         NSString * appSecret = params[AppSecret];

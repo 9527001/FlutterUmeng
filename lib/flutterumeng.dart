@@ -19,6 +19,22 @@ class FlutterUmeng {
     return version;
   }
 
+  // 是否安装APP
+  static Future<bool> isInstall(SharePlatformType sharePlatformType) {
+    Map<String, dynamic> shareMap = {
+      UmAppParams.share_platform_type: sharePlatformType.index,
+    };
+    return _channel.invokeMethod(UmAppMethod.is_install, shareMap);
+  }
+
+  // 是否支持分享
+  static Future<bool> isSupport(SharePlatformType sharePlatformType) {
+    Map<String, dynamic> shareMap = {
+      UmAppParams.share_platform_type: sharePlatformType.index,
+    };
+    return _channel.invokeMethod(UmAppMethod.is_support, shareMap);
+  }
+
   static Future<String> init({
     @required String appKey,
     @required String channel,
@@ -27,8 +43,7 @@ class FlutterUmeng {
       UmAppString.app_key: appKey,
       UmAppString.channel: channel,
     };
-    final String result =
-        await _channel.invokeMethod(UmAppMethod.share_init_um, shareMap);
+    final String result = await _channel.invokeMethod(UmAppMethod.share_init_um, shareMap);
     return result;
   }
 
@@ -41,12 +56,10 @@ class FlutterUmeng {
       UmAppString.channel: channel,
     };
     if (Platform.isAndroid) {
-      final String result =
-          await _channel.invokeMethod(UmAppMethod.share_init_um_android, shareMap);
+      final String result = await _channel.invokeMethod(UmAppMethod.share_init_um_android, shareMap);
       return result;
     }
     return '';
-
   }
 
   static Future<String> initIos({
@@ -58,8 +71,7 @@ class FlutterUmeng {
       UmAppString.channel: channel,
     };
     if (Platform.isIOS) {
-      final String result =
-          await _channel.invokeMethod(UmAppMethod.share_init_um_ios, shareMap);
+      final String result = await _channel.invokeMethod(UmAppMethod.share_init_um_ios, shareMap);
       return result;
     }
     return '';
@@ -85,8 +97,7 @@ class FlutterUmeng {
       UmAppString.app_secret: appSecret,
       UmAppString.redirect_url: redirectURL,
     };
-    final String result =
-        await _channel.invokeMethod(UmAppMethod.share_init_wechat, shareMap);
+    final String result = await _channel.invokeMethod(UmAppMethod.share_init_wechat, shareMap);
     return result;
   }
 
@@ -100,10 +111,9 @@ class FlutterUmeng {
       UmAppString.app_key: appKey,
       UmAppString.app_secret: appSecret,
       UmAppString.redirect_url: redirectURL,
-      UmAppString.file_provider:fileProvider,
+      UmAppString.file_provider: fileProvider,
     };
-    final String result =
-        await _channel.invokeMethod(UmAppMethod.share_init_qq, shareMap);
+    final String result = await _channel.invokeMethod(UmAppMethod.share_init_qq, shareMap);
     return result;
   }
 
@@ -117,8 +127,7 @@ class FlutterUmeng {
       UmAppString.app_secret: appSecret,
       UmAppString.redirect_url: redirectURL,
     };
-    final String result =
-        await _channel.invokeMethod(UmAppMethod.share_init_sina, shareMap);
+    final String result = await _channel.invokeMethod(UmAppMethod.share_init_sina, shareMap);
     return result;
   }
 
@@ -129,34 +138,40 @@ class FlutterUmeng {
     Map<String, dynamic> shareMap = {
       UmAppString.app_key: appKey,
     };
-    final String result =
-        await _channel.invokeMethod(UmAppMethod.share_init_dingtalk, shareMap);
+    final String result = await _channel.invokeMethod(UmAppMethod.share_init_dingtalk, shareMap);
     return result;
   }
 
   static Future<ShareResultBean> share({ShareBean share}) async {
     Map<String, dynamic> shareMap = {
-      UmAppParams.share_platform_type:
-          share.platFormType == null ? 0 : share.platFormType.index,
+      UmAppParams.share_platform_type: share.platFormType == null ? 0 : share.platFormType.index,
       UmAppParams.share_title: share.title,
       UmAppParams.share_content: share.content,
       UmAppParams.share_image: share.image,
       UmAppParams.share_web_url: share.webUrl,
-      UmAppParams.share_hd_image_data:share.hdImageData,
-      UmAppParams.share_mp_json_str:share.miniJsonMap,
+      UmAppParams.share_hd_image_data: share.hdImageData,
+      UmAppParams.share_mp_json_str: share.miniJsonMap,
     };
-    final Map result =
-        await _channel.invokeMethod(share.appMethod, shareMap);
+    String platformName = UmAppString.platformNames[share.platFormType] ?? '';
+    bool install = await isInstall(share.platFormType);
+    if (!install) {
+      return ShareResultBean(code: ShareResultCode.uninstall, msg: '${platformName == null || platformName == '' ? '应用' : platformName}未安装！');
+    }
+    bool support = await isSupport(share.platFormType);
+    if (!support) {
+      return ShareResultBean(code: ShareResultCode.notSupport, msg: '${platformName == null || platformName == '' ? '此应用' : platformName}暂不支持分享！');
+    }
+    final Map result = await _channel.invokeMethod(share.appMethod, shareMap);
     ShareResultCode shareResponseType;
-    if(result['code'] == 0){
+    if (result['code'] == 0) {
       shareResponseType = ShareResultCode.failed;
-    }else if(result['code'] == 1){
+    } else if (result['code'] == 1) {
       shareResponseType = ShareResultCode.cancel;
-    }else if(result['code'] == 2) {
+    } else if (result['code'] == 2) {
       shareResponseType = ShareResultCode.success;
-    }else {
+    } else {
       shareResponseType = ShareResultCode.unknown;
     }
-    return ShareResultBean(code: shareResponseType,msg: result['msg']);
+    return ShareResultBean(code: shareResponseType, msg: result['msg']);
   }
 }

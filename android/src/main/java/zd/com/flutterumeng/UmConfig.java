@@ -46,6 +46,9 @@ class UmMethodConfig {
     static String shareInitSina = "shareInitSina";
     static String shareInitDingTalk = "shareInitDingTalk";
     static String setLogEnabled = "setLogEnabled";
+
+    static String isInstall = "isInstall";
+    static String isSupport = "isSupport";
 }
 
 

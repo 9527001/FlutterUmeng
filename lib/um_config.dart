@@ -1,3 +1,5 @@
+import 'package:flutterumeng/share_bean.dart';
+
 class UmAppString {
   static const String app_key = 'AppKey';
   static const String app_secret = 'AppSecret';
@@ -5,6 +7,21 @@ class UmAppString {
   static const String redirect_url_content = 'http://mobile.umeng.com/social';
   static const String channel = 'channel';
   static const String file_provider = 'file_provider';
+
+  static const String wechat = '微信';
+  static const String qq = '腾讯QQ';
+  static const String dingtalk = '钉钉';
+  static const String sina = '新浪微博';
+
+
+  static const Map platformNames = {
+    SharePlatformType.wechat:wechat,
+    SharePlatformType.qq:qq,
+    SharePlatformType.qq_zone:qq,
+    SharePlatformType.wechat_circle:wechat,
+    SharePlatformType.dingtalk:dingtalk,
+    SharePlatformType.sina:sina,
+  };
 }
 
 class UmAppParams {
@@ -42,4 +59,7 @@ class UmAppMethod {
   static const String share_init_dingtalk = 'shareInitDingTalk';
 
   static const String set_log_enabled = 'setLogEnabled';
+
+  static const String is_install = 'isInstall';
+  static const String is_support ='isSupport';
 }

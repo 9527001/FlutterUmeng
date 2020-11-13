@@ -50,4 +50,7 @@ static const NSString * MethodShareInitDingTalk = @"shareInitDingTalk";
 
 static const NSString * StringMethodSetLogEnabled = @"setLogEnabled";
 
+static const NSString * StringMethodIsInstall = @"isInstall";
+
+static const NSString * StringMethodIsSupport = @"isSupport";
 #endif /* AppString_h */

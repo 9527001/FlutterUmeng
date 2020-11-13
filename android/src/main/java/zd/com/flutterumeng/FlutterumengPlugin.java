@@ -58,6 +58,12 @@ public class FlutterumengPlugin implements MethodCallHandler, PluginRegistry.Act
             System.out.println("UM初始化成功");
 
 
+        } else if (call.method.equals(UmMethodConfig.isInstall)) {
+            int index = call.argument(UmConfig.sharePlatformType);
+            result.success(UMShareAPI.get(activity.getApplicationContext()).isInstall(activity, onShareType(index)));
+        } else if (call.method.equals(UmMethodConfig.isSupport)) {
+            int index = call.argument(UmConfig.sharePlatformType);
+            result.success(UMShareAPI.get(activity.getApplicationContext()).isSupport(activity, onShareType(index)));
         } else if (call.method.equals(UmMethodConfig.setLogEnabled)) {
             boolean argument = call.argument(UmConfig.enable);
             UMConfigure.setLogEnabled(argument);
@@ -149,7 +155,7 @@ public class FlutterumengPlugin implements MethodCallHandler, PluginRegistry.Act
             UMMin umMin = new UMMin(url); //兼容低版本的网页链接
             umMin.setTitle(title); // 小程序消息title
             umMin.setDescription(content); // 小程序消息描述
-            if (hdImageData != null ) {
+            if (hdImageData != null) {
                 umMin.setThumb(new UMImage(registrar.activity(), hdImageData)); // 小程序消息封面图片
             }
             umMin.setPath(path); //小程序页面路径
