@@ -18,31 +18,30 @@ A new Flutter  umeng plugin.
   s.dependency 'Flutter'
   
   # 基础库
-  s.dependency 'UMCCommon','2.1.4'
+  s.dependency 'UMCCommon','7.2.2'
   
   # 分享依赖库
 #  s.dependency 'UMCSecurityPlugins','1.0.6'
   
   # 日志打印
-  s.dependency 'UMCCommonLog','1.0.0'
+  s.dependency 'UMCCommonLog','2.0.0'
   
  # U-Share SDK UI模块（分享面板，建议添加）
-  s.dependency 'UMCShare/UI','6.9.8'
+  s.dependency 'UMCShare/UI','6.10.1'
 
   # 集成微信(精简版0.2M)
-  s.dependency 'UMCShare/Social/ReducedWeChat','6.9.8'
-
+  s.dependency 'UMCShare/Social/ReducedWeChat'
   # 集成微信(完整版14.4M)
 #  s.dependency 'UMCShare/Social/WeChat'
 
   # 集成QQ/QZone/TIM(精简版0.5M)
-  s.dependency 'UMCShare/Social/ReducedQQ','6.9.8'
+  s.dependency 'UMCShare/Social/ReducedQQ'
 
   # 集成QQ/QZone/TIM(完整版7.6M)
 #  s.dependency 'UMCShare/Social/QQ'
 
   # 集成新浪微博(精简版1M)
-  s.dependency 'UMCShare/Social/ReducedSina','6.9.8'
+  s.dependency 'UMCShare/Social/ReducedSina'
 
   # 集成新浪微博(完整版25.3M)
 #  s.dependency 'UMCShare/Social/Sina'
@@ -52,7 +51,7 @@ A new Flutter  umeng plugin.
 #  s.dependency 'UMCShare/Social/AlipayShare'
 
   # 集成钉钉
-  s.dependency 'UMCShare/Social/DingDing','6.9.8'
+  s.dependency 'UMCShare/Social/DingDing'
 
 
    

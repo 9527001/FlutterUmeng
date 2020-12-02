@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:flutterumeng/share_bean.dart';
 import 'package:flutterumeng/share_result_bean.dart';
+import 'package:flutterumeng/social_platform_init_entity.dart';
 
 import 'um_config.dart';
 export 'um_config.dart';
@@ -36,14 +37,20 @@ class FlutterUmeng {
   }
 
   static Future<String> init({
-    @required String appKey,
-    @required String channel,
+    @required UMengInitEntity uMengInitEntity,
   }) async {
     Map<String, dynamic> shareMap = {
-      UmAppString.app_key: appKey,
-      UmAppString.channel: channel,
+      'UMengInit': uMengInitEntity.toJson(),
     };
-    final String result = await _channel.invokeMethod(UmAppMethod.share_init_um, shareMap);
+    final String result = await _channel.invokeMethod('shareInitUM', shareMap);
+    return result;
+  }
+
+  static Future<String> initPlatforms({
+    List<SocialPlatformInitEntity> platforms,
+  }) async {
+    List<Map> list = platforms.map((e) => e.toFinalJson()).toList();
+    final String result = await _channel.invokeMethod('initPlatforms', list);
     return result;
   }
 
@@ -152,14 +159,16 @@ class FlutterUmeng {
       UmAppParams.share_hd_image_data: share.hdImageData,
       UmAppParams.share_mp_json_str: share.miniJsonMap,
     };
-    String platformName = UmAppString.platformNames[share.platFormType] ?? '';
-    bool install = await isInstall(share.platFormType);
-    if (!install) {
-      return ShareResultBean(code: ShareResultCode.uninstall, msg: '${platformName == null || platformName == '' ? '应用' : platformName}未安装！');
-    }
-    bool support = await isSupport(share.platFormType);
-    if (!support) {
-      return ShareResultBean(code: ShareResultCode.notSupport, msg: '${platformName == null || platformName == '' ? '此应用' : platformName}暂不支持分享！');
+    if (share.platFormType != null) {
+      String platformName = UmAppString.platformNames[share.platFormType] ?? '';
+      bool install = await isInstall(share.platFormType);
+      if (!install) {
+        return ShareResultBean(code: ShareResultCode.uninstall, msg: '${platformName == null || platformName == '' ? '应用' : platformName}未安装！');
+      }
+      bool support = await isSupport(share.platFormType);
+      if (!support) {
+        return ShareResultBean(code: ShareResultCode.notSupport, msg: '${platformName == null || platformName == '' ? '此应用' : platformName}暂不支持分享！');
+      }
     }
     final Map result = await _channel.invokeMethod(share.appMethod, shareMap);
     ShareResultCode shareResponseType;

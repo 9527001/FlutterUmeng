@@ -40,6 +40,7 @@ class UmMethodConfig {
     static String shareWithBoard = "shareWithBoard";
     static String shareMiniProgram = "shareMiniProgram";//小程序
 
+    static String shareInitUMAndroid = "shareInitUMAndroid";
     static String shareInitUM = "shareInitUMAndroid";
     static String shareInitWeChat = "shareInitWeChat";
     static String shareInitQQ = "shareInitQQ";
@@ -47,7 +48,6 @@ class UmMethodConfig {
     static String shareInitDingTalk = "shareInitDingTalk";
     static String setLogEnabled = "setLogEnabled";
 
-    static String isInstall = "isInstall";
     static String isSupport = "isSupport";
 }
 

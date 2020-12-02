@@ -4,6 +4,7 @@ import 'dart:async';
 import 'package:flutter/services.dart';
 import 'package:flutterumeng/flutterumeng.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:flutterumeng/social_platform_init_entity.dart';
 
 void main() => runApp(MyApp());
 
@@ -23,25 +24,36 @@ class _MyAppState extends State<MyApp> {
 
   // Platform messages are asynchronous, so we initialize in an async method.
   Future<void> initPlatformState() async {
-    FlutterUmeng.setLogEnabled(enabled: true);
-
-    FlutterUmeng.initIos(
-        appKey: '5e9ad231978eea083f0c79af', channel: 'appstore');
-    FlutterUmeng.initAndroid(
-        appKey: '5e9e8f0b978eea083f0c813e', channel: 'android');
-    FlutterUmeng.initDingTalk(appKey: 'dingoaiex4ka6vshseqky9');
-    FlutterUmeng.initQQ(
-        appKey: '1110443120',
-        appSecret: 'aYYjmc3FoH7Va8E7',
-        redirectURL: '');
-    FlutterUmeng.initWeChat(
+    FlutterUmeng.init(
+      uMengInitEntity: UMengInitEntity(
+        androidAppKey: '5fbf49ec1e29ca3d7be61a7e',
+        iosAppKey: '5e9ad231978eea083f0c79af',
+        androidChannel: 'Android',
+        iosChannel: 'App Store',
+      ),
+    );
+    FlutterUmeng.initPlatforms(platforms: [
+      SocialPlatformInitEntity(platformType: SharePlatformType.qq, appKey: '1110443120', appSecret: 'aYYjmc3FoH7Va8E7'),
+      SocialPlatformInitEntity(
+        platformType: SharePlatformType.wechat,
         appKey: 'wxffb1c9036944dc36',
-        appSecret: "0fd7719d0a12c5f795d7bb67d5db034d",
-        redirectURL: 'https://www.reading-china.com/');
-    FlutterUmeng.initSina(
-        appKey: '655199122',
-        appSecret: "17dfef507567f6f038e20ef2a2b1f1ca",
-        redirectURL: 'https://www.baidu.com');
+        appSecret: '0fd7719d0a12c5f795d7bb67d5db034d',
+        redirectURL: 'https://www.reading-china.com/',
+      ),
+      SocialPlatformInitEntity(
+        platformType: SharePlatformType.sina,
+        appKey: 'wxffb1c9036944dc36',
+        appSecret: '0fd7719d0a12c5f795d7bb67d5db034d',
+        redirectURL: 'https://www.reading-china.com/',
+      ),
+      SocialPlatformInitEntity(
+        platformType: SharePlatformType.dingtalk,
+        appKey: 'dingoaiex4ka6vshseqky9',
+        appSecret: '',
+      ),
+    ]);
+
+    FlutterUmeng.setLogEnabled(enabled: true);
 
     String platformVersion;
     // Platform messages may fail, so we use a try/catch PlatformException.
@@ -80,8 +92,7 @@ class _MyAppState extends State<MyApp> {
                 ),
                 onTap: () {
                   FlutterUmeng.share(
-                    share: ShareBean.text(
-                        platFormType: SharePlatformType.dingtalk, text: '123'),
+                    share: ShareBean.text(platFormType: SharePlatformType.dingtalk, text: '123'),
                   );
                 },
               ),
@@ -97,7 +108,7 @@ class _MyAppState extends State<MyApp> {
                     share: ShareBean.image(
                         platFormType: SharePlatformType.dingtalk,
                         image:
-                        'https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1587181134&di=012a3e34f388d1c9b8fab346fac09587&src=http://c.hiphotos.baidu.com/zhidao/pic/item/d009b3de9c82d1587e249850820a19d8bd3e42a9.jpg'),
+                            'https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1587181134&di=012a3e34f388d1c9b8fab346fac09587&src=http://c.hiphotos.baidu.com/zhidao/pic/item/d009b3de9c82d1587e249850820a19d8bd3e42a9.jpg'),
                   );
                 },
               ),
@@ -114,7 +125,7 @@ class _MyAppState extends State<MyApp> {
                         platFormType: SharePlatformType.dingtalk,
                         text: '123',
                         image:
-                        'https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1587181134&di=012a3e34f388d1c9b8fab346fac09587&src=http://c.hiphotos.baidu.com/zhidao/pic/item/d009b3de9c82d1587e249850820a19d8bd3e42a9.jpg'),
+                            'https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1587181134&di=012a3e34f388d1c9b8fab346fac09587&src=http://c.hiphotos.baidu.com/zhidao/pic/item/d009b3de9c82d1587e249850820a19d8bd3e42a9.jpg'),
                   );
                 },
               ),
@@ -132,7 +143,7 @@ class _MyAppState extends State<MyApp> {
                       title: '标题',
                       content: '副标题',
                       image:
-                      'https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1587181134&di=012a3e34f388d1c9b8fab346fac09587&src=http://c.hiphotos.baidu.com/zhidao/pic/item/d009b3de9c82d1587e249850820a19d8bd3e42a9.jpg',
+                          'https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1587181134&di=012a3e34f388d1c9b8fab346fac09587&src=http://c.hiphotos.baidu.com/zhidao/pic/item/d009b3de9c82d1587e249850820a19d8bd3e42a9.jpg',
                       url: 'https://www.baidu.com',
                     ),
                   );
@@ -147,7 +158,7 @@ class _MyAppState extends State<MyApp> {
                 ),
                 onTap: () {
                   FlutterUmeng.share(
-                    share:ShareBean.miniProgram(
+                    share: ShareBean.miniProgram(
                       platFormType: SharePlatformType.wechat,
                       title: '你多久没开心了',
                       content: '名片内容',
@@ -171,8 +182,7 @@ class _MyAppState extends State<MyApp> {
                   ),
                 ),
                 onTap: () async {
-                  ShareResultBean shareResultBean =
-                  await FlutterUmeng.share(
+                  ShareResultBean shareResultBean = await FlutterUmeng.share(
                     share: ShareBean.board(
                       text: '测试',
                     ),
@@ -185,6 +195,17 @@ class _MyAppState extends State<MyApp> {
                       backgroundColor: Colors.red,
                       textColor: Colors.white,
                       fontSize: 16.0);
+                },
+              ),
+              GestureDetector(
+                child: Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Text(
+                    '获取版本号',
+                  ),
+                ),
+                onTap: () async {
+                  FlutterUmeng.setLogEnabled(enabled: true);
                 },
               ),
             ],
