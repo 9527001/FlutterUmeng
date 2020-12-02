@@ -165,6 +165,7 @@ class FlutterUmeng {
       if (!install) {
         return ShareResultBean(code: ShareResultCode.uninstall, msg: '${platformName == null || platformName == '' ? '应用' : platformName}未安装！');
       }
+      //返回结果异常，暂时弃用
       // bool support = await isSupport(share.platFormType);
       // if (!support) {
       //   return ShareResultBean(code: ShareResultCode.notSupport, msg: '${platformName == null || platformName == '' ? '此应用' : platformName}暂不支持分享！');
