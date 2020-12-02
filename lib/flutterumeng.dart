@@ -165,11 +165,12 @@ class FlutterUmeng {
       if (!install) {
         return ShareResultBean(code: ShareResultCode.uninstall, msg: '${platformName == null || platformName == '' ? '应用' : platformName}未安装！');
       }
-      bool support = await isSupport(share.platFormType);
-      if (!support) {
-        return ShareResultBean(code: ShareResultCode.notSupport, msg: '${platformName == null || platformName == '' ? '此应用' : platformName}暂不支持分享！');
-      }
+      // bool support = await isSupport(share.platFormType);
+      // if (!support) {
+      //   return ShareResultBean(code: ShareResultCode.notSupport, msg: '${platformName == null || platformName == '' ? '此应用' : platformName}暂不支持分享！');
+      // }
     }
+
     final Map result = await _channel.invokeMethod(share.appMethod, shareMap);
     ShareResultCode shareResponseType;
     if (result['code'] == 0) {
