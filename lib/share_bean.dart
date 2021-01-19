@@ -9,7 +9,8 @@ class ShareBean {
   final SharePlatformType platFormType;
   final String title;
   final String content;
-  final String image;
+  final String image;//分享图片的路径
+  final Uint8List imageByte; //分享图片使用
   final String webUrl;
   final String appMethod;
   final Map<String, dynamic> miniJsonMap;
@@ -17,12 +18,12 @@ class ShareBean {
   final Uint8List hdImageDataIos; //小程序消息封面图片，小于128k
   final dynamic hdImageData; //小程序消息封面图片，小于128k
 
-
   ShareBean({
     this.platFormType,
     this.title,
     this.content,
     this.image,
+    this.imageByte,
     this.webUrl,
     this.appMethod,
     this.miniJsonMap,
@@ -49,6 +50,13 @@ class ShareBean {
     return ShareBean(platFormType: platFormType, image: image, appMethod: UmAppMethod.share_image);
   }
 
+  factory ShareBean.imageByte({
+    @required SharePlatformType platFormType,
+    @required Uint8List imageByte,
+  }) {
+    return ShareBean(platFormType: platFormType, imageByte: imageByte, appMethod: UmAppMethod.share_image);
+  }
+
   factory ShareBean.imageText({
     @required SharePlatformType platFormType,
     @required String image,
@@ -61,12 +69,24 @@ class ShareBean {
       appMethod: UmAppMethod.share_image_text,
     );
   }
+  factory ShareBean.imageByteText({
+    @required SharePlatformType platFormType,
+    @required Uint8List imageByte,
+    @required String text,
+  }) {
+    return ShareBean(
+      platFormType: platFormType,
+      imageByte: imageByte,
+      content: text,
+      appMethod: UmAppMethod.share_image_text,
+    );
+  }
 
   factory ShareBean.miniProgram({
     @required SharePlatformType platFormType,
     @required String title,
     @required String content,
-    String image,//在ios上显示的封面图片
+    String image, //在ios上显示的封面图片
     @required String webPageUrl, //低版本微信网页链接
     @required String userName, //小程序username，如 gh_3ac2059ac66f
     @required String path, //小程序页面路径，如 pages/page10007/page10007

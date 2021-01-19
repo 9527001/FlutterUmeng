@@ -14,6 +14,7 @@ class UmConfig {
     static String shareTitle = "title";
     static String shareContent = "content";
     static String shareImage = "image";
+    static String shareImageByte = "imageByte";
     static String shareWebUrl = "webUrl";
     static String shareAppMethod = "appMethod";
     static String enable = "enable";

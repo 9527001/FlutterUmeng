@@ -44,20 +44,29 @@
     }else if ([@"shareImage" isEqualToString:methodString]){
         
         NSString * shareImage = params[ShareImage];
-        UMSocialPlatformType platformType = [FlutterUMenPluginUtil socialPlatformTypeWithCustomSharePlatformType:params[SharePlatformType]];
         
+        UMSocialPlatformType platformType = [FlutterUMenPluginUtil socialPlatformTypeWithCustomSharePlatformType:params[SharePlatformType]];
         
         //创建分享消息对象
         UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
         //创建图片内容对象
         UMShareImageObject *shareObject = [[UMShareImageObject alloc] init];
-        //如果有缩略图，则设置缩略图
-        shareObject.thumbImage = shareImage;
+        if(shareImage){
+            //如果有缩略图，则设置缩略图
+            shareObject.thumbImage = shareImage;
+            
+            /** 分享单个图片（支持UIImage，NSdata以及图片链接Url NSString类对象集合）
+             * @note 图片大小根据各个平台限制而定
+             */
+            [shareObject setShareImage:shareImage];
+        }else{
+            FlutterStandardTypedData * shareImageByte = params[ShareImageByte];
+            if([shareImageByte isKindOfClass:[FlutterStandardTypedData class]]){
+                shareObject.thumbImage = shareImageByte.data;
+                [shareObject setShareImage:shareImageByte.data];
+            }
+        }
         
-        /** 分享单个图片（支持UIImage，NSdata以及图片链接Url NSString类对象集合）
-         * @note 图片大小根据各个平台限制而定
-         */
-        [shareObject setShareImage:shareImage];
         //分享消息对象设置分享内容对象
         messageObject.shareObject = shareObject;
         //调用分享接口
@@ -73,9 +82,21 @@
         messageObject.text = shareText;
         //创建图片内容对象
         UMShareImageObject *shareObject = [[UMShareImageObject alloc] init];
-        //如果有缩略图，则设置缩略图
-        shareObject.thumbImage = shareImage;
-        [shareObject setShareImage:shareImage];
+        if(shareImage){
+            //如果有缩略图，则设置缩略图
+            shareObject.thumbImage = shareImage;
+            
+            /** 分享单个图片（支持UIImage，NSdata以及图片链接Url NSString类对象集合）
+             * @note 图片大小根据各个平台限制而定
+             */
+            [shareObject setShareImage:shareImage];
+        }else{
+            FlutterStandardTypedData * shareImageByte = params[ShareImageByte];
+            if([shareImageByte isKindOfClass:[FlutterStandardTypedData class]]){
+                shareObject.thumbImage = shareImageByte.data;
+                [shareObject setShareImage:shareImageByte.data];
+            }
+        }
         //分享消息对象设置分享内容对象
         messageObject.shareObject = shareObject;
         //调用分享接口

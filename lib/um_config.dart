@@ -29,6 +29,7 @@ class UmAppParams {
   static const String share_title = 'title';
   static const String share_content = 'content';
   static const String share_image = 'image';
+  static const String share_image_byte = 'imageByte';
   static const String share_web_url = 'webUrl';
   static const String share_app_method = 'appMethod';
   static const String enable = 'enable';

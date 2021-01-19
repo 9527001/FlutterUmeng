@@ -1,6 +1,7 @@
 package zd.com.flutterumeng;
 
 import android.app.Activity;
+import android.text.TextUtils;
 
 import com.umeng.socialize.PlatformConfig;
 import com.umeng.socialize.ShareAction;
@@ -12,6 +13,7 @@ import com.umeng.socialize.media.UMWeb;
 import java.util.HashMap;
 
 import androidx.annotation.NonNull;
+
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.PluginRegistry;
@@ -30,26 +32,48 @@ class FlutterUMengPluginForShare {
         } else if (call.method.equals(UmMethodConfig.shareImage)) {
             int index = call.argument(UmConfig.sharePlatformType);
             String imageUrl = call.argument(UmConfig.shareImage);
-            UMImage image = new UMImage(registrar.activity(), imageUrl);
-            image.setThumb(new UMImage(registrar.activity(), imageUrl));
-            new ShareAction(registrar.activity())
-                    .setPlatform(FlutterUMengPluginUtil.onShareType(index))//传入平台
-                    .withText("")//分享内容
-                    .withMedia(image)
-                    .setCallback(new UmengshareActionListener(registrar.activity(), result))//回调监听器
-                    .share();
+            UMImage image = null;
+            if (!TextUtils.isEmpty(imageUrl)) {
+                image = new UMImage(registrar.activity(), imageUrl);
+                image.setThumb(new UMImage(registrar.activity(), imageUrl));
+            } else {
+                String shareImageByte = call.argument(UmConfig.shareImageByte);
+                if (shareImageByte != null) {
+                    image = new UMImage(registrar.activity(), shareImageByte);
+                    image.setThumb(new UMImage(registrar.activity(), shareImageByte)); // 小程序消息封面图片
+                }
+            }
+            if (image != null) {
+                new ShareAction(registrar.activity())
+                        .setPlatform(FlutterUMengPluginUtil.onShareType(index))//传入平台
+                        .withText("")//分享内容
+                        .withMedia(image)
+                        .setCallback(new UmengshareActionListener(registrar.activity(), result))//回调监听器
+                        .share();
+            }
         } else if (call.method.equals(UmMethodConfig.shareImageText)) {
             int index = call.argument(UmConfig.sharePlatformType);
             String imageUrl = call.argument(UmConfig.shareImage);
             String content = call.argument(UmConfig.shareContent);
-            UMImage image = new UMImage(registrar.activity(), imageUrl);
-            image.setThumb(new UMImage(registrar.activity(), imageUrl));
-            new ShareAction(registrar.activity())
-                    .setPlatform(FlutterUMengPluginUtil.onShareType(index))//传入平台
-                    .withText(content)//分享内容
-                    .withMedia(image)
-                    .setCallback(new UmengshareActionListener(registrar.activity(), result))//回调监听器
-                    .share();
+            UMImage image = null;
+            if (!TextUtils.isEmpty(imageUrl)) {
+                image = new UMImage(registrar.activity(), imageUrl);
+                image.setThumb(new UMImage(registrar.activity(), imageUrl));
+            } else {
+                String shareImageByte = call.argument(UmConfig.shareImageByte);
+                if (shareImageByte != null) {
+                    image = new UMImage(registrar.activity(), shareImageByte);
+                    image.setThumb(new UMImage(registrar.activity(), shareImageByte)); // 小程序消息封面图片
+                }
+            }
+            if (image != null) {
+                new ShareAction(registrar.activity())
+                        .setPlatform(FlutterUMengPluginUtil.onShareType(index))//传入平台
+                        .withText(content)//分享内容
+                        .withMedia(image)
+                        .setCallback(new UmengshareActionListener(registrar.activity(), result))//回调监听器
+                        .share();
+            }
         } else if (call.method.equals(UmMethodConfig.shareWebView)) {
             int index = call.argument(UmConfig.sharePlatformType);
             String url = call.argument(UmConfig.shareWebUrl);

@@ -154,6 +154,7 @@ class FlutterUmeng {
       UmAppParams.share_platform_type: share.platFormType == null ? 0 : share.platFormType.index,
       UmAppParams.share_title: share.title,
       UmAppParams.share_content: share.content,
+      UmAppParams.share_image_byte: share.imageByte,
       UmAppParams.share_image: share.image,
       UmAppParams.share_web_url: share.webUrl,
       UmAppParams.share_hd_image_data: share.hdImageData,

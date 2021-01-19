@@ -14,6 +14,7 @@ static  NSString *  const SharePlatformType = @"platFormType";
 static  NSString * const ShareTitle = @"title";
 static const NSString *  ShareContent = @"content";
 static const NSString *  ShareImage = @"image";
+static const NSString *  ShareImageByte = @"imageByte";
 static const NSString *  ShareWebUrl = @"webUrl";
 static const NSString *  ShareAppMethod = @"appMethod";
 static const NSString * StringParamsEnable = @"enable";
