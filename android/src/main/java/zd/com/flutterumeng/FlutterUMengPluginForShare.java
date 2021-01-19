@@ -37,7 +37,7 @@ class FlutterUMengPluginForShare {
                 image = new UMImage(registrar.activity(), imageUrl);
                 image.setThumb(new UMImage(registrar.activity(), imageUrl));
             } else {
-                String shareImageByte = call.argument(UmConfig.shareImageByte);
+                byte[] shareImageByte = call.argument(UmConfig.shareImageByte);
                 if (shareImageByte != null) {
                     image = new UMImage(registrar.activity(), shareImageByte);
                     image.setThumb(new UMImage(registrar.activity(), shareImageByte)); // 小程序消息封面图片
@@ -60,7 +60,7 @@ class FlutterUMengPluginForShare {
                 image = new UMImage(registrar.activity(), imageUrl);
                 image.setThumb(new UMImage(registrar.activity(), imageUrl));
             } else {
-                String shareImageByte = call.argument(UmConfig.shareImageByte);
+                byte[] shareImageByte = call.argument(UmConfig.shareImageByte);
                 if (shareImageByte != null) {
                     image = new UMImage(registrar.activity(), shareImageByte);
                     image.setThumb(new UMImage(registrar.activity(), shareImageByte)); // 小程序消息封面图片
@@ -94,7 +94,7 @@ class FlutterUMengPluginForShare {
             int index = call.argument(UmConfig.sharePlatformType);
             String title = call.argument(UmConfig.shareTitle);
             String content = call.argument(UmConfig.shareContent);
-            String hdImageData = call.argument(UmConfig.shareHDImageData);
+            byte[] hdImageData = call.argument(UmConfig.shareHDImageData);
             HashMap<String, String> mpJson = call.argument(UmConfig.shareMPJsonStr);
             String userName = mpJson.get(UmConfig.shareUserName);
             String path = mpJson.get(UmConfig.sharePath);
