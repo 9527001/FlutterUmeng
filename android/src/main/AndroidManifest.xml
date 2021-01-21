@@ -52,19 +52,19 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
-<!--        <activity-alias-->
-<!--            android:name="${applicationId}.wxapi.WXEntryActivity"-->
-<!--            -->
-<!--            android:launchMode="singleTop"-->
-<!--            android:targetActivity="zd.com.flutterumeng.wxapi.WXEntryActivity"-->
-<!--            android:theme="@android:style/Theme.Translucent.NoTitleBar">-->
+        <activity-alias
+            android:name="${applicationId}.wxapi.WXEntryActivity"
+
+            android:launchMode="singleTop"
+            android:targetActivity="zd.com.flutterumeng.wxapi.WXEntryActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
 
 
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.VIEW" />-->
-<!--                <category android:name="android.intent.category.DEFAULT" />-->
-<!--            </intent-filter>-->
-<!--        </activity-alias>-->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity-alias>
         <activity
             android:name="com.tencent.tauth.AuthActivity"
             android:launchMode="singleTask"
