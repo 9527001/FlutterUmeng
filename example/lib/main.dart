@@ -1,4 +1,9 @@
+import 'dart:developer';
+import 'dart:typed_data';
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'dart:async';
 
 import 'package:flutter/services.dart';
@@ -15,6 +20,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   String _platformVersion = 'Unknown';
+  GlobalKey _posterGlobalKey = GlobalKey();
 
   @override
   void initState() {
@@ -76,142 +82,195 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Plugin example app'),
-        ),
-        body: Center(
-          child: Column(
-            children: <Widget>[
-              GestureDetector(
-                child: Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Text(
-                    'text',
+      home: RepaintBoundary(
+        key: _posterGlobalKey,
+        child: Scaffold(
+          appBar: AppBar(
+            title: const Text('Plugin example app'),
+          ),
+          body: Center(
+            child: Column(
+              children: <Widget>[
+                GestureDetector(
+                  child: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Text(
+                      'text',
+                    ),
                   ),
+                  onTap: () {
+                    FlutterUmeng.share(
+                      share: ShareBean.text(platFormType: SharePlatformType.dingtalk, text: '123'),
+                    );
+                  },
                 ),
-                onTap: () {
-                  FlutterUmeng.share(
-                    share: ShareBean.text(platFormType: SharePlatformType.dingtalk, text: '123'),
-                  );
-                },
-              ),
-              GestureDetector(
-                child: Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Text(
-                    'image',
+                GestureDetector(
+                  child: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Text(
+                      'image',
+                    ),
                   ),
+                  onTap: () {
+                    FlutterUmeng.share(
+                      share: ShareBean.image(
+                          platFormType: SharePlatformType.dingtalk,
+                          image:
+                              'https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1587181134&di=012a3e34f388d1c9b8fab346fac09587&src=http://c.hiphotos.baidu.com/zhidao/pic/item/d009b3de9c82d1587e249850820a19d8bd3e42a9.jpg'),
+                    );
+                  },
                 ),
-                onTap: () {
-                  FlutterUmeng.share(
-                    share: ShareBean.image(
+                GestureDetector(
+                  child: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Text(
+                      'image text',
+                    ),
+                  ),
+                  onTap: () {
+                    FlutterUmeng.share(
+                      share: ShareBean.imageText(
+                          platFormType: SharePlatformType.dingtalk,
+                          text: '123',
+                          image:
+                              'https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1587181134&di=012a3e34f388d1c9b8fab346fac09587&src=http://c.hiphotos.baidu.com/zhidao/pic/item/d009b3de9c82d1587e249850820a19d8bd3e42a9.jpg'),
+                    );
+                  },
+                ),
+                GestureDetector(
+                  child: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Text(
+                      'web',
+                    ),
+                  ),
+                  onTap: () {
+                    FlutterUmeng.share(
+                      share: ShareBean.web(
                         platFormType: SharePlatformType.dingtalk,
+                        title: '标题',
+                        content: '副标题',
                         image:
-                            'https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1587181134&di=012a3e34f388d1c9b8fab346fac09587&src=http://c.hiphotos.baidu.com/zhidao/pic/item/d009b3de9c82d1587e249850820a19d8bd3e42a9.jpg'),
-                  );
-                },
-              ),
-              GestureDetector(
-                child: Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Text(
-                    'image text',
-                  ),
+                            'https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1587181134&di=012a3e34f388d1c9b8fab346fac09587&src=http://c.hiphotos.baidu.com/zhidao/pic/item/d009b3de9c82d1587e249850820a19d8bd3e42a9.jpg',
+                        url: 'https://www.baidu.com',
+                      ),
+                    );
+                  },
                 ),
-                onTap: () {
-                  FlutterUmeng.share(
-                    share: ShareBean.imageText(
-                        platFormType: SharePlatformType.dingtalk,
-                        text: '123',
-                        image:
-                            'https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1587181134&di=012a3e34f388d1c9b8fab346fac09587&src=http://c.hiphotos.baidu.com/zhidao/pic/item/d009b3de9c82d1587e249850820a19d8bd3e42a9.jpg'),
-                  );
-                },
-              ),
-              GestureDetector(
-                child: Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Text(
-                    'web',
-                  ),
-                ),
-                onTap: () {
-                  FlutterUmeng.share(
-                    share: ShareBean.web(
-                      platFormType: SharePlatformType.dingtalk,
-                      title: '标题',
-                      content: '副标题',
-                      image:
-                          'https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1587181134&di=012a3e34f388d1c9b8fab346fac09587&src=http://c.hiphotos.baidu.com/zhidao/pic/item/d009b3de9c82d1587e249850820a19d8bd3e42a9.jpg',
-                      url: 'https://www.baidu.com',
+                GestureDetector(
+                  child: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Text(
+                      '小程序测试',
                     ),
-                  );
-                },
-              ),
-              GestureDetector(
-                child: Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Text(
-                    '小程序测试',
                   ),
+                  onTap: () {
+                    FlutterUmeng.share(
+                      share: ShareBean.miniProgram(
+                        platFormType: SharePlatformType.wechat,
+                        title: '你多久没开心了',
+                        content: '名片内容',
+                        image: 'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1689053532,4230915864&fm=26&gp=0.jpg',
+                        webPageUrl: 'www.baidu.com',
+                        userName: 'gh_fc260d5d7391',
+                        path: 'page/home',
+                        hdImageDataIos: null,
+                        hdImageDataAndroid: 'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1689053532,4230915864&fm=26&gp=0.jpg',
+                        miniProgramType: 1,
+                        withShareTicket: true,
+                      ),
+                    );
+                  },
                 ),
-                onTap: () {
-                  FlutterUmeng.share(
-                    share: ShareBean.miniProgram(
-                      platFormType: SharePlatformType.wechat,
-                      title: '你多久没开心了',
-                      content: '名片内容',
-                      image: 'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1689053532,4230915864&fm=26&gp=0.jpg',
-                      webPageUrl: 'www.baidu.com',
-                      userName: 'gh_fc260d5d7391',
-                      path: 'page/home',
-                      hdImageDataIos: null,
-                      hdImageDataAndroid: 'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1689053532,4230915864&fm=26&gp=0.jpg',
-                      miniProgramType: 1,
-                      withShareTicket: true,
+                GestureDetector(
+                  child: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Text(
+                      '固定面板，测试使用',
                     ),
-                  );
-                },
-              ),
-              GestureDetector(
-                child: Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Text(
-                    '固定面板，测试使用',
                   ),
+                  onTap: () async {
+                    ShareResultBean shareResultBean = await FlutterUmeng.share(
+                      share: ShareBean.board(
+                        text: '测试',
+                      ),
+                    );
+                    Fluttertoast.showToast(
+                        msg: shareResultBean.msg ?? '',
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.CENTER,
+                        timeInSecForIosWeb: 1,
+                        backgroundColor: Colors.red,
+                        textColor: Colors.white,
+                        fontSize: 16.0);
+                  },
                 ),
-                onTap: () async {
-                  ShareResultBean shareResultBean = await FlutterUmeng.share(
-                    share: ShareBean.board(
-                      text: '测试',
+                GestureDetector(
+                  child: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Text(
+                      '获取版本号',
                     ),
-                  );
-                  Fluttertoast.showToast(
-                      msg: shareResultBean.msg ?? '',
-                      toastLength: Toast.LENGTH_SHORT,
-                      gravity: ToastGravity.CENTER,
-                      timeInSecForIosWeb: 1,
-                      backgroundColor: Colors.red,
-                      textColor: Colors.white,
-                      fontSize: 16.0);
-                },
-              ),
-              GestureDetector(
-                child: Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Text(
-                    '获取版本号',
                   ),
+                  onTap: () async {
+                    FlutterUmeng.setLogEnabled(enabled: true);
+                  },
                 ),
-                onTap: () async {
-                  FlutterUmeng.setLogEnabled(enabled: true);
-                },
-              ),
-            ],
+                GestureDetector(
+                  child: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Text(
+                      '是否安装sina',
+                    ),
+                  ),
+                  onTap: () async {
+                    bool resutl = await FlutterUmeng.isInstall(SharePlatformType.sina);
+                    log(resutl.toString());
+                  },
+                ),
+                GestureDetector(
+                  child: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Text(
+                      '是否安装sina2',
+                    ),
+                  ),
+                  onTap: () async {
+                    ShareResultBean shareResultBean = await FlutterUmeng.share(share: ShareBean.text(platFormType: SharePlatformType.sina, text: '123'));
+                    log(shareResultBean.msg);
+                  },
+                ),
+                GestureDetector(
+                  child: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Text(
+                      '分享imageData 到微信',
+                    ),
+                  ),
+                  onTap: () async {
+                    Uint8List data = await _getImageData();
+                    ShareResultBean shareResultBean = await FlutterUmeng.share(share: ShareBean.imageByte(platFormType: SharePlatformType.wechat, imageByte: data));
+                    log(shareResultBean.msg);
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),
     );
+  }
+
+  Future<Uint8List> _getImageData() async {
+    RenderRepaintBoundary boundary = _posterGlobalKey.currentContext.findRenderObject();
+    var image = await boundary.toImage(pixelRatio: 3);
+    ByteData byteData = await image.toByteData(format: ImageByteFormat.png);
+//存储
+    Uint8List imageByte = Uint8List.fromList(byteData.buffer.asUint8List());
+    // imageByte = await FlutterImageCompress.compressWithList(
+    //   imageByte,
+    //   quality: 5,
+    // );
+    return imageByte;
   }
 }

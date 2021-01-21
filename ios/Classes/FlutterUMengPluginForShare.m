@@ -51,11 +51,11 @@
         UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
         //创建图片内容对象
         UMShareImageObject *shareObject = [[UMShareImageObject alloc] init];
-        if(shareImage){
+        if(!shareImage){
             //如果有缩略图，则设置缩略图
             shareObject.thumbImage = shareImage;
             
-            /** 分享单个图片（支持UIImage，NSdata以及图片链接Url NSString类对象集合）
+            /**     分享单个图片（支持UIImage，NSdata以及图片链接Url NSString类对象集合）
              * @note 图片大小根据各个平台限制而定
              */
             [shareObject setShareImage:shareImage];
@@ -82,7 +82,7 @@
         messageObject.text = shareText;
         //创建图片内容对象
         UMShareImageObject *shareObject = [[UMShareImageObject alloc] init];
-        if(shareImage){
+        if(!shareImage){
             //如果有缩略图，则设置缩略图
             shareObject.thumbImage = shareImage;
             
