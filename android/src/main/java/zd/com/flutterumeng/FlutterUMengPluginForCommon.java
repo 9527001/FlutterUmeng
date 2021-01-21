@@ -54,7 +54,7 @@ class FlutterUMengPluginForCommon {
             String appSecret = call.argument(UmConfig.appSecret);
             String fileProvider = call.argument(UmConfig.file_provider);
             PlatformConfig.setWeixin(appkey, appSecret);
-            PlatformConfig.setSinaFileProvider(fileProvider);
+            PlatformConfig.setWXFileProvider(fileProvider);
             System.out.println("微信初始化成功");
 
         } else if (call.method.equals(UmMethodConfig.shareInitQQ)) {
