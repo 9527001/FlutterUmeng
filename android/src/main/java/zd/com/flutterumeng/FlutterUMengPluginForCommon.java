@@ -52,22 +52,26 @@ class FlutterUMengPluginForCommon {
         } else if (call.method.equals(UmMethodConfig.shareInitWeChat)) {
             String appkey = call.argument(UmConfig.appKey);
             String appSecret = call.argument(UmConfig.appSecret);
+            String fileProvider = call.argument(UmConfig.file_provider);
             PlatformConfig.setWeixin(appkey, appSecret);
+            PlatformConfig.setSinaFileProvider(fileProvider);
             System.out.println("微信初始化成功");
 
         } else if (call.method.equals(UmMethodConfig.shareInitQQ)) {
             String appID = call.argument(UmConfig.appKey);
             String appKey = call.argument(UmConfig.appSecret);
-            String fileProviderr = call.argument(UmConfig.file_provider);
+            String fileProvider = call.argument(UmConfig.file_provider);
             PlatformConfig.setQQZone(appID, appKey);
-            PlatformConfig.setQQFileProvider(fileProviderr);
+            PlatformConfig.setQQFileProvider(fileProvider);
             System.out.println("Qq初始化成功");
 
         } else if (call.method.equals(UmMethodConfig.shareInitSina)) {
             String appkey = call.argument(UmConfig.appKey);
             String appSecret = call.argument(UmConfig.appSecret);
             String redirectURL = call.argument(UmConfig.redirectURL);
+            String fileProvider = call.argument(UmConfig.file_provider);
             PlatformConfig.setSinaWeibo(appkey, appSecret, redirectURL);
+            PlatformConfig.setSinaFileProvider(fileProvider);
             System.out.println("sina初始化成功");
 
         } else if (call.method.equals("isInstall")) {

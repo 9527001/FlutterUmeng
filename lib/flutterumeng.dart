@@ -97,12 +97,14 @@ class FlutterUmeng {
   static Future<String> initWeChat({
     @required String appKey,
     @required String appSecret,
+    @required String fileProvider,
     String redirectURL = UmAppString.redirect_url_content,
   }) async {
     Map<String, dynamic> shareMap = {
       UmAppString.app_key: appKey,
       UmAppString.app_secret: appSecret,
       UmAppString.redirect_url: redirectURL,
+      UmAppString.file_provider: fileProvider,
     };
     final String result = await _channel.invokeMethod(UmAppMethod.share_init_wechat, shareMap);
     return result;
@@ -127,12 +129,14 @@ class FlutterUmeng {
   static Future<String> initSina({
     @required String appKey,
     @required String appSecret,
+    @required String fileProvider,
     String redirectURL = UmAppString.redirect_url_content,
   }) async {
     Map<String, dynamic> shareMap = {
       UmAppString.app_key: appKey,
       UmAppString.app_secret: appSecret,
       UmAppString.redirect_url: redirectURL,
+      UmAppString.file_provider: fileProvider,
     };
     final String result = await _channel.invokeMethod(UmAppMethod.share_init_sina, shareMap);
     return result;
