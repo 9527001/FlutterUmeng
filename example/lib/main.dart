@@ -114,7 +114,7 @@ class _MyAppState extends State<MyApp> {
                   onTap: () {
                     FlutterUmeng.share(
                       share: ShareBean.image(
-                          platFormType: SharePlatformType.dingtalk,
+                          platFormType: SharePlatformType.wechat,
                           image:
                               'https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1587181134&di=012a3e34f388d1c9b8fab346fac09587&src=http://c.hiphotos.baidu.com/zhidao/pic/item/d009b3de9c82d1587e249850820a19d8bd3e42a9.jpg'),
                     );

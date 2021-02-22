@@ -51,7 +51,7 @@
         UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
         //创建图片内容对象
         UMShareImageObject *shareObject = [[UMShareImageObject alloc] init];
-        if(!shareImage){
+        if([shareImage isKindOfClass:[NSString class]]){
             //如果有缩略图，则设置缩略图
             shareObject.thumbImage = shareImage;
             
@@ -82,7 +82,7 @@
         messageObject.text = shareText;
         //创建图片内容对象
         UMShareImageObject *shareObject = [[UMShareImageObject alloc] init];
-        if(!shareImage){
+        if([shareImage isKindOfClass:[NSString class]]){
             //如果有缩略图，则设置缩略图
             shareObject.thumbImage = shareImage;
             
