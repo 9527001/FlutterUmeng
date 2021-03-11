@@ -94,7 +94,7 @@ class FlutterUMengPluginForShare {
             int index = call.argument(UmConfig.sharePlatformType);
             String title = call.argument(UmConfig.shareTitle);
             String content = call.argument(UmConfig.shareContent);
-            String hdImageData = call.argument(UmConfig.shareHDImageData);
+            byte[] hdImageData = call.argument(UmConfig.shareHDImageData);
             HashMap<String, String> mpJson = call.argument(UmConfig.shareMPJsonStr);
             String userName = mpJson.get(UmConfig.shareUserName);
             String path = mpJson.get(UmConfig.sharePath);

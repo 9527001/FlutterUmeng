@@ -14,9 +14,7 @@ class ShareBean {
   final String webUrl;
   final String appMethod;
   final Map<String, dynamic> miniJsonMap;
-  final String hdImageDataAndroid; //小程序消息封面图片，小于128k
-  final Uint8List hdImageDataIos; //小程序消息封面图片，小于128k
-  final dynamic hdImageData; //小程序消息封面图片，小于128k
+  final Uint8List hdImageData; //小程序消息封面图片，小于128k
 
   ShareBean({
     this.platFormType,
@@ -28,8 +26,6 @@ class ShareBean {
     this.appMethod,
     this.miniJsonMap,
     this.hdImageData,
-    this.hdImageDataAndroid,
-    this.hdImageDataIos,
   });
 
   factory ShareBean.text({
@@ -90,8 +86,7 @@ class ShareBean {
     @required String webPageUrl, //低版本微信网页链接
     @required String userName, //小程序username，如 gh_3ac2059ac66f
     @required String path, //小程序页面路径，如 pages/page10007/page10007
-    @required Uint8List hdImageDataIos, // 小程序新版本的预览图 128k iOS data 目前传null
-    @required String hdImageDataAndroid, // 小程序新版本的预览图 128k android 都可以 ，目前仅支持string
+    @required Uint8List hdImageData, // 小程序新版本的预览图 128k
     /**
         分享小程序的版本（正式，开发，体验）
         正式版 尾巴正常显示 0
@@ -106,7 +101,7 @@ class ShareBean {
       title: title,
       content: content,
       image: image,
-      hdImageData: Platform.isAndroid ? hdImageDataAndroid : hdImageDataIos,
+      hdImageData: hdImageData,
       appMethod: UmAppMethod.share_mini_program,
       miniJsonMap: MiniProgramBean(
         webPageUrl: webPageUrl,
